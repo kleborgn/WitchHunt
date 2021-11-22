@@ -1,3 +1,5 @@
+package main.hci.cmd;
+
 public final class Debug {
     public static boolean showDebugMessage = false;
 

@@ -1,3 +1,7 @@
+package main.hci.cmd;
+
+import main.engine.Game;
+
 import java.util.Scanner;
 
 public class Console {
