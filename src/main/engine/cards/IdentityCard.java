@@ -1,3 +1,5 @@
+package main.engine.cards;
+
 public class IdentityCard {
     Identities identity;
     private boolean isRevealed;

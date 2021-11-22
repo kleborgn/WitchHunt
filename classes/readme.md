@@ -1,1 +1,1 @@
-# Compiled classes directory
+# Source directory
