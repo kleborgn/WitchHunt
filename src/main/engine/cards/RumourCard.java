@@ -4,23 +4,42 @@ import main.engine.players.Player;
 
 public abstract class RumourCard {
     private String name;
+    private boolean isRevealed = false;
 
     /**
      * Use the witch effect
-     * @param accused The accused player
+     * @param owner The player owning the card
      * @param accuser The accusing player
      * @return Return false if the effect isn't usable, otherwise true
      */
-    public abstract boolean witchEffect(Player accused, Player accuser);
+    public abstract boolean witchEffect(Player owner, Player accuser);
 
     /**
      * Use the hunt effect
-     * @param accused The accused player
+     * @param owner The player owning the card
      * @return Return false if the effect isn't usable, otherwise true
      */
-    public abstract boolean huntEffect(Player accused);
+    public abstract boolean huntEffect(Player owner);
 
     public String getName() {
         return name;
+    }
+
+    public abstract boolean isWitchEffectUsable();
+
+    public abstract boolean isHuntEffectUsable(Player owner);
+
+    public boolean isRevealed() {
+        return isRevealed;
+    }
+
+    public void setRevealed(boolean revealed) {
+        isRevealed = revealed;
+    }
+
+    public abstract String witchEffectToString();
+    public abstract String huntEffectToString();
+    public String sideEffectToString() {
+        return "None.";
     }
 }

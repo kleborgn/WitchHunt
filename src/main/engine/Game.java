@@ -8,6 +8,7 @@ import main.hci.cmd.Console;
 import main.Main;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public final class Game {
     private static Game game;
@@ -19,6 +20,8 @@ public final class Game {
     private static ArrayList<Player> tiePlayers;
 
     private static ArrayList<RumourCard> discardedCards;
+
+    public static Random rand = new Random();
 
     int nbPlayers, nbHumans, nbAI;
 
@@ -35,13 +38,17 @@ public final class Game {
     }
 
     private static void createPlayerList(int nbHumans, int nbAI) {
+        String name;
         if (players != null)
             return;
         players = new ArrayList<Player>();
         for (int i = 0; i < nbHumans; i++) {
             if (Main.getMode() == Constants.MODE_CMD) {
-                System.out.println("Entrer le nom du joueur " + (i + 1) + " :");
-                players.add(new HumanPlayer(Console.sc.next()));
+                do {
+                    System.out.println("Enter a name for player " + (i + 1) + " :");
+                    name = Console.sc.next();
+                } while(getPlayerByName(name) != null);
+                players.add(new HumanPlayer(name));
             }
             //TODO: add GUI input
         }
@@ -110,8 +117,36 @@ public final class Game {
         Game.nextPlayer = nextPlayer;
     }
 
+    public static void setNextPlayer(String name) {
+        setNextPlayer(getPlayerByName(name));
+    }
+
     public static ArrayList<Round> getRounds() {
         return rounds;
     }
 
+    public static Player getPlayerByName(String name) {
+        for (Player p:players) {
+            if (p.getName().equals(name)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public static boolean isPlayerExisting(String name) {
+        return (getPlayerByName(name) != null);
+    }
+
+    public static ArrayList<RumourCard> getDiscardedCards() {
+        return discardedCards;
+    }
+
+    public static RumourCard getCardByName(String name, ArrayList<RumourCard> cards) {
+        for (RumourCard card:cards) {
+            if (card.toString().equals(name))
+                return card;
+        }
+        return null;
+    }
 }
