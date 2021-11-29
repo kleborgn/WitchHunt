@@ -149,4 +149,12 @@ public final class Game {
         }
         return null;
     }
+
+    public static ArrayList<RumourCard> getAllRevealedRumourCards() {
+        ArrayList<RumourCard> result = new ArrayList<RumourCard>();
+        for (Player p:players) {
+            result.addAll(p.getRevealedCards());
+        }
+        return result;
+    }
 }
