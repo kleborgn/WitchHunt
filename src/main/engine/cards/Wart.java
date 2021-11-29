@@ -1,13 +1,9 @@
 package main.engine.cards;
 
-import main.Main;
-import main.engine.Constants;
 import main.engine.Game;
 import main.engine.players.Player;
 
-import java.util.ArrayList;
-
-public class BlackCat extends RumourCard {
+public class Wart extends RumourCard {
     @Override
     public boolean witchEffect(Player owner, Player accuser) {
         Game.setNextPlayer(owner);
@@ -17,11 +13,8 @@ public class BlackCat extends RumourCard {
 
     @Override
     public boolean huntEffect(Player owner) {
-        ArrayList<RumourCard> cards = Game.getDiscardedCards();
-
-        owner.addCard(owner.pickCard(cards));
-        owner.discardCard(this);
-
+        Game.setNextPlayer(owner.choosePlayer());
+        this.setRevealed(true);
         return true;
     }
 
@@ -32,7 +25,7 @@ public class BlackCat extends RumourCard {
 
     @Override
     public boolean isHuntEffectUsable(Player owner) {
-        return Game.getDiscardedCards().size() > 0;
+        return true;
     }
 
     @Override
@@ -42,11 +35,16 @@ public class BlackCat extends RumourCard {
 
     @Override
     public String huntEffectToString() {
-        return "Add one discarded card to your hand, and then discard this card. Take next turn.";
+        return "Choose next player.";
+    }
+
+    @Override
+    public String sideEffectToString() {
+        return "While revealed, you cannot be chosen by the Ducking Stool.";
     }
 
     @Override
     public String toString() {
-        return "Black Cat";
+        return "Wart";
     }
 }

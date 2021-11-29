@@ -1,15 +1,12 @@
 package main.engine.cards;
 
-import main.Main;
-import main.engine.Constants;
 import main.engine.Game;
 import main.engine.players.Player;
 
-import java.util.ArrayList;
-
-public class BlackCat extends RumourCard {
+public class TheInquisition extends RumourCard {
     @Override
     public boolean witchEffect(Player owner, Player accuser) {
+        owner.discardCard(owner.pickCard(owner.getNonRevealedCards()));
         Game.setNextPlayer(owner);
         this.setRevealed(true);
         return true;
@@ -17,11 +14,10 @@ public class BlackCat extends RumourCard {
 
     @Override
     public boolean huntEffect(Player owner) {
-        ArrayList<RumourCard> cards = Game.getDiscardedCards();
-
-        owner.addCard(owner.pickCard(cards));
-        owner.discardCard(this);
-
+        Player choice = owner.choosePlayer();
+        Game.setNextPlayer(choice);
+        owner.displayIdentity(choice);
+        this.setRevealed(true);
         return true;
     }
 
@@ -32,21 +28,24 @@ public class BlackCat extends RumourCard {
 
     @Override
     public boolean isHuntEffectUsable(Player owner) {
-        return Game.getDiscardedCards().size() > 0;
+        if(owner.getIdentityCard().getIsRevealed() && owner.getIdentityCard().getIdentity() == Identities.Villager) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public String witchEffectToString() {
-        return "Take next turn.";
+        return "Discard a card from your hand. Take next turn.";
     }
 
     @Override
     public String huntEffectToString() {
-        return "Add one discarded card to your hand, and then discard this card. Take next turn.";
+        return "Choose next player. Before their turn, secretly look at their identity.";
     }
 
     @Override
     public String toString() {
-        return "Black Cat";
+        return "The Inquisition";
     }
 }

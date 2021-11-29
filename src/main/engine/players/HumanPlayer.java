@@ -55,5 +55,18 @@ public class HumanPlayer extends Player {
         return chosenCard;
     }
 
+    @Override
+    public void displayIdentity(Player who) {
+        if(Main.getMode() == Constants.MODE_CMD) {
+            System.out.println(who.getIdentityCard().getIdentity().toString());
+        }
+    }
 
+    @Override
+    public void displayMessage(String message) {
+        if (Main.getMode() == Constants.MODE_CMD) {
+            System.out.println(this.getName() + " : " + message);
+        }
+        //TODO: add gui mode
+    }
 }

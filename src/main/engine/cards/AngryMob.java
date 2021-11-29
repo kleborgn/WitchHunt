@@ -9,6 +9,7 @@ public class AngryMob extends RumourCard {
     @Override
     public boolean witchEffect(Player owner, Player accuser) {
         Game.setNextPlayer(owner);
+        this.setRevealed(true);
         return true;
     }
 
@@ -17,18 +18,12 @@ public class AngryMob extends RumourCard {
         Player selected = owner.choosePlayer();
 
         if (selected.isBroomstickRevealed()) {
-            if (Main.getMode() == Constants.MODE_CMD) {
-                System.out.println("This player has revealed a Broomstick card.");
-                //TODO: gui mode
-            }
+            owner.displayMessage("This player has revealed a Broomstick card.");
             return false;
         }
 
         if(selected.getIdentityCard().getIsRevealed()) {
-            if (Main.getMode() == Constants.MODE_CMD) {
-                System.out.println("This player has already revealed his identity.");
-                //TODO: gui mode
-            }
+            owner.displayMessage("This player has already revealed his identity.");
             return false;
         }
 
@@ -38,11 +33,12 @@ public class AngryMob extends RumourCard {
         if (selected.getIdentityCard().getIdentity() == Identities.Villager)
             owner.subPoints(2);
 
+        this.setRevealed(true);
         return true;
     }
 
     @Override
-    public boolean isWitchEffectUsable() {
+    public boolean isWitchEffectUsable(Player owner) {
         return true;
     }
 

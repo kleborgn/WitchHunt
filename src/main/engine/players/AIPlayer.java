@@ -19,4 +19,14 @@ public class AIPlayer extends Player {
     public RumourCard pickCard(ArrayList<RumourCard> cards) {
         return cards.get(Game.rand.nextInt(cards.size() - 1));
     }
+
+    @Override
+    public void displayIdentity(Player who) {
+
+    }
+
+    @Override
+    public void displayMessage(String message) {
+
+    }
 }

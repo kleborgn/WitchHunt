@@ -20,7 +20,7 @@ public class Broomstick extends RumourCard {
     }
 
     @Override
-    public boolean isWitchEffectUsable() {
+    public boolean isWitchEffectUsable(Player owner) {
         return true;
     }
 

@@ -25,7 +25,7 @@ public abstract class RumourCard {
         return name;
     }
 
-    public abstract boolean isWitchEffectUsable();
+    public abstract boolean isWitchEffectUsable(Player owner);
 
     public abstract boolean isHuntEffectUsable(Player owner);
 

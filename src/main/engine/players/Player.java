@@ -3,10 +3,7 @@ package main.engine.players;
 import main.Main;
 import main.engine.Constants;
 import main.engine.Game;
-import main.engine.cards.Broomstick;
-import main.engine.cards.Identities;
-import main.engine.cards.IdentityCard;
-import main.engine.cards.RumourCard;
+import main.engine.cards.*;
 import main.hci.cmd.Console;
 
 import java.util.ArrayList;
@@ -78,6 +75,15 @@ public abstract class Player {
         return false;
     }
 
+    public boolean isWartRevealed() {
+        for (RumourCard card:this.getRevealedCards()) {
+            if (card instanceof Wart) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -100,5 +106,27 @@ public abstract class Player {
 
     public void setCanPlay(boolean canPlay) {
         this.canPlay = canPlay;
+    }
+
+    public abstract void displayIdentity(Player who);
+
+    public ArrayList<RumourCard> getRevealedCards() {
+        ArrayList<RumourCard> revealedCards = new ArrayList<RumourCard>();
+        for (RumourCard card:rumourCards) {
+            if (card.isRevealed())
+                revealedCards.add(card);
+        }
+        return revealedCards;
+    }
+
+    public abstract void displayMessage(String message);
+
+    public ArrayList<RumourCard> getNonRevealedCards() {
+        ArrayList<RumourCard> nonRevealedCards = new ArrayList<RumourCard>();
+        for (RumourCard card:rumourCards) {
+            if (!card.isRevealed())
+                nonRevealedCards.add(card);
+        }
+        return nonRevealedCards;
     }
 }
