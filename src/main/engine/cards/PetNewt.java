@@ -7,13 +7,14 @@ public class PetNewt extends RumourCard {
     @Override
     public boolean witchEffect(Player owner, Player accuser) {
         Game.setNextPlayer(owner);
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         this.setRevealed(true);
         return true;
     }
 
     @Override
     public boolean huntEffect(Player owner) {
-        RumourCard card = owner.pickCard(Game.getAllRevealedRumourCards());
+        RumourCard card = owner.pickCard(Game.getCurrentRound().getAllRevealedRumourCards());
         card.setRevealed(false);
         for (Player p:Game.getPlayers()) {
             if (p.getRevealedCards().contains(card)) {

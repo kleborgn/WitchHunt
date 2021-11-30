@@ -14,6 +14,7 @@ public class DuckingStool extends RumourCard {
         }
 
         Game.setNextPlayer(chosenPlayer);
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         this.setRevealed(true);
 
         return true;
@@ -33,6 +34,7 @@ public class DuckingStool extends RumourCard {
         do {
             chosenPlayer.displayMessage("Reveal your identity (1) or discard a card (2).");
             choice = Console.sc.nextInt();
+            Console.sc.nextLine();
         } while (choice < 1 || choice > 2);
 
         switch (choice) {
@@ -41,16 +43,19 @@ public class DuckingStool extends RumourCard {
                 if (chosenPlayer.getIdentityCard().getIdentity() == Identities.Witch) {
                     owner.addPoints(1);
                     Game.setNextPlayer(owner);
+                    Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
                 }
                 if (chosenPlayer.getIdentityCard().getIdentity() == Identities.Villager) {
                     owner.subPoints(1);
                     Game.setNextPlayer(chosenPlayer);
+                    Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
                 }
             }
             case 2 -> {
                 card = chosenPlayer.pickCard(chosenPlayer.getNonRevealedCards());
                 chosenPlayer.discardCard(card);
                 Game.setNextPlayer(chosenPlayer);
+                Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
             }
         }
 

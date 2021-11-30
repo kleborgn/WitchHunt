@@ -7,6 +7,7 @@ public class Toad extends RumourCard {
     @Override
     public boolean witchEffect(Player owner, Player accuser) {
         Game.setNextPlayer(owner);
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         this.setRevealed(true);
         return true;
     }
@@ -17,8 +18,10 @@ public class Toad extends RumourCard {
 
         if (owner.getIdentityCard().getIdentity() == Identities.Witch) {
             Game.setNextPlayer(Game.getPlayers().get(Game.getPlayers().indexOf(owner) - 1));
+            Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         } else {
             Game.setNextPlayer(owner.choosePlayer());
+            Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         }
         this.setRevealed(true);
         return true;

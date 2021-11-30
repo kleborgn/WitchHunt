@@ -6,10 +6,11 @@ import main.engine.players.Player;
 public class Cauldron extends RumourCard {
     @Override
     public boolean witchEffect(Player owner, Player accuser) {
-        RumourCard randomCard = accuser.getNonRevealedCards().get(Game.rand.nextInt(accuser.getNonRevealedCards().size() - 1));
+        RumourCard randomCard = accuser.getNonRevealedCards().get(Game.rand.nextInt(accuser.getNonRevealedCards().size()));
         accuser.discardCard(randomCard);
         accuser.displayMessage("You have discarded a random card : " + randomCard.toString());
         Game.setNextPlayer(owner);
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         this.setRevealed(true);
         return true;
     }
@@ -20,8 +21,10 @@ public class Cauldron extends RumourCard {
 
         if (owner.getIdentityCard().getIdentity() == Identities.Witch) {
             Game.setNextPlayer(Game.getPlayers().get(Game.getPlayers().indexOf(owner) - 1));
+            Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         } else {
             Game.setNextPlayer(owner.choosePlayer());
+            Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         }
         this.setRevealed(true);
         return true;

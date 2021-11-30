@@ -3,6 +3,7 @@ package main.engine.players;
 import main.Main;
 import main.engine.Constants;
 import main.engine.Game;
+import main.engine.cards.Identities;
 import main.engine.cards.RumourCard;
 import main.hci.cmd.Console;
 
@@ -48,7 +49,7 @@ public class HumanPlayer extends Player {
                 System.out.println("Enter the name of a card to pick :");
                 choice = Console.sc.nextLine();
                 chosenCard = Game.getCardByName(choice, cards);
-            } while (chosenCard != null);
+            } while (chosenCard == null);
         }
         //TODO: gui mode
 
@@ -68,5 +69,30 @@ public class HumanPlayer extends Player {
             System.out.println(this.getName() + " : " + message);
         }
         //TODO: add gui mode
+    }
+
+    @Override
+    public void chooseIdentity() {
+        if(Main.getMode() == Constants.MODE_CMD) {
+            int input;
+            System.out.println(this.getName() + " choose your identity:");
+            System.out.println("1: Witch");
+            System.out.println("2: Villager");
+            input = Console.sc.nextInt();
+            Console.sc.nextLine();
+
+            switch (input) {
+                case 1 -> {
+                    this.pickIdentity(Identities.Witch);
+                }
+                case 2 -> {
+                    this.pickIdentity(Identities.Villager);
+                }
+                default -> {
+                    System.out.println("Unknown command.");
+                    this.chooseIdentity();
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 package main.engine;
 
-import main.engine.cards.RumourCard;
+import main.engine.cards.*;
 import main.engine.players.AIPlayer;
 import main.engine.players.HumanPlayer;
 import main.engine.players.Player;
@@ -13,13 +13,12 @@ import java.util.Random;
 public final class Game {
     private static Game game;
 
+    private static ArrayList<RumourCard> allCards;
+
     private static ArrayList<Player> players;
-    private static Player nextPlayer;
 
-    private static ArrayList<Round> rounds;
+    private static Round currentRound;
     private static ArrayList<Player> tiePlayers;
-
-    private static ArrayList<RumourCard> discardedCards;
 
     public static Random rand = new Random();
 
@@ -29,11 +28,30 @@ public final class Game {
         this.nbPlayers = nbPlayers;
         this.nbHumans = nbHumans;
         this.nbAI = nbAI;
+        initCards();
+    }
+
+    private static void initCards() {
+        allCards = new ArrayList<RumourCard>();
+        allCards.add(new AngryMob());
+        allCards.add(new BlackCat());
+        allCards.add(new Broomstick());
+        allCards.add(new Cauldron());
+        allCards.add(new DuckingStool());
+        allCards.add(new EvilEye());
+        allCards.add(new HookedNose());
+        allCards.add(new PetNewt());
+        allCards.add(new PointedHat());
+        allCards.add(new TheInquisition());
+        allCards.add(new Toad());
+        allCards.add(new Wart());
     }
 
     public static void createGame(int nbPlayers, int nbHumans, int nbAI) {
         if(game == null) {
             game = new Game(nbPlayers, nbHumans, nbAI);
+            createPlayerList(nbHumans, nbAI);
+            tiePlayers = new ArrayList<Player>();
         }
     }
 
@@ -59,7 +77,10 @@ public final class Game {
     }
 
     public static void startGame() {
-
+        while(!isLastRound()) {
+            currentRound = new Round(players);
+            currentRound.startRound(players);
+        }
     }
 
     public static boolean isLastRound() {
@@ -98,7 +119,7 @@ public final class Game {
     }
 
     public static void addDiscardedCard(RumourCard card) {
-        discardedCards.add(card);
+        currentRound.getDiscardedCards().add(card);
     }
 
     public static Game getInstance() {
@@ -110,19 +131,15 @@ public final class Game {
     }
 
     public static Player getNextPlayer() {
-        return nextPlayer;
+        return currentRound.getNextPlayer();
     }
 
     public static void setNextPlayer(Player nextPlayer) {
-        Game.nextPlayer = nextPlayer;
+        currentRound.setNextPlayer(nextPlayer);
     }
 
     public static void setNextPlayer(String name) {
         setNextPlayer(getPlayerByName(name));
-    }
-
-    public static ArrayList<Round> getRounds() {
-        return rounds;
     }
 
     public static Player getPlayerByName(String name) {
@@ -139,7 +156,7 @@ public final class Game {
     }
 
     public static ArrayList<RumourCard> getDiscardedCards() {
-        return discardedCards;
+        return currentRound.getDiscardedCards();
     }
 
     public static RumourCard getCardByName(String name, ArrayList<RumourCard> cards) {
@@ -150,11 +167,11 @@ public final class Game {
         return null;
     }
 
-    public static ArrayList<RumourCard> getAllRevealedRumourCards() {
-        ArrayList<RumourCard> result = new ArrayList<RumourCard>();
-        for (Player p:players) {
-            result.addAll(p.getRevealedCards());
-        }
-        return result;
+    public static Round getCurrentRound() {
+        return currentRound;
+    }
+
+    public static ArrayList<RumourCard> getAllCards() {
+        return allCards;
     }
 }

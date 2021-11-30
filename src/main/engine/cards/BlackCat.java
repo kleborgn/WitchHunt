@@ -11,6 +11,7 @@ public class BlackCat extends RumourCard {
     @Override
     public boolean witchEffect(Player owner, Player accuser) {
         Game.setNextPlayer(owner);
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         this.setRevealed(true);
         return true;
     }

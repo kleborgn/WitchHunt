@@ -3,8 +3,11 @@ package main.engine.cards;
 import main.engine.players.Player;
 
 public abstract class RumourCard {
-    private String name;
-    private boolean isRevealed = false;
+    private boolean isRevealed;
+
+    RumourCard() {
+        this.isRevealed = false;
+    }
 
     /**
      * Use the witch effect
@@ -20,10 +23,6 @@ public abstract class RumourCard {
      * @return Return false if the effect isn't usable, otherwise true
      */
     public abstract boolean huntEffect(Player owner);
-
-    public String getName() {
-        return name;
-    }
 
     public abstract boolean isWitchEffectUsable(Player owner);
 

@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         if(args.length == 0) {
-            System.out.println("Usage: java WitchHunt (--cmdline | --gui) [--debug]");
+            System.out.println("Usage: java -jar WitchHunt.jar (--cmdline | --gui) [--debug]");
         } else {
             if(args.length == 2) {
                 if(Objects.equals(args[1], "--debug"))
@@ -21,6 +21,7 @@ public class Main {
             switch (args[0]) {
                 case "--cmdline" -> {
                     isCmdMode = true;
+                    //hookShutdown();
                     Console.initGame();
                 }
                 case "--gui" -> {
@@ -37,5 +38,22 @@ public class Main {
         if (isCmdMode) { return Constants.MODE_CMD; }
         if (isGUIMode) { return Constants.MODE_GUI; }
         return Constants.MODE_NULL;
+    }
+
+    // Hook VM shutdown to handle Ctrl+C
+    private static void hookShutdown() {
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                try {
+                    Thread.sleep(200);
+                    System.out.println("Exited.");
+                    Console.sc.close();
+
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

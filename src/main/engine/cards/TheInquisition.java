@@ -8,6 +8,7 @@ public class TheInquisition extends RumourCard {
     public boolean witchEffect(Player owner, Player accuser) {
         owner.discardCard(owner.pickCard(owner.getNonRevealedCards()));
         Game.setNextPlayer(owner);
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         this.setRevealed(true);
         return true;
     }
@@ -16,6 +17,7 @@ public class TheInquisition extends RumourCard {
     public boolean huntEffect(Player owner) {
         Player choice = owner.choosePlayer();
         Game.setNextPlayer(choice);
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         owner.displayIdentity(choice);
         this.setRevealed(true);
         return true;

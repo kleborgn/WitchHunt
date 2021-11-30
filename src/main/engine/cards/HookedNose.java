@@ -10,6 +10,7 @@ public class HookedNose extends RumourCard {
         owner.getRumourCards().add(choice);
         accuser.getRumourCards().remove(choice);
         Game.setNextPlayer(owner);
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         this.setRevealed(true);
         return true;
     }
@@ -18,6 +19,7 @@ public class HookedNose extends RumourCard {
     public boolean huntEffect(Player owner) {
         Player chosenPlayer = owner.choosePlayer();
         Game.setNextPlayer(chosenPlayer);
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         RumourCard chosenCard = owner.pickCard(chosenPlayer.getRumourCards());
         owner.getRumourCards().add(chosenCard);
         chosenPlayer.getRumourCards().remove(chosenCard);
@@ -43,5 +45,10 @@ public class HookedNose extends RumourCard {
     @Override
     public String huntEffectToString() {
         return "Choose next player. Before their turn, take a random card from their hand and add it to your hand.";
+    }
+
+    @Override
+    public String toString() {
+        return "Hooked Nose";
     }
 }

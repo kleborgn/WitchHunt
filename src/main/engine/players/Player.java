@@ -22,11 +22,14 @@ public abstract class Player {
     public Player(String name) {
         this.name = name;
         this.points = 0;
+        this.rumourCards = new ArrayList<RumourCard>();
     }
 
     public void pickIdentity(Identities identity) {
         this.identityCard = new IdentityCard(identity);
     }
+
+    public abstract void chooseIdentity();
 
     public void discardCard(RumourCard card) {
         this.rumourCards.remove(card);
@@ -128,5 +131,51 @@ public abstract class Player {
                 nonRevealedCards.add(card);
         }
         return nonRevealedCards;
+    }
+
+    public void accuseSomeone() {
+        Player chosenPlayer = this.choosePlayer();
+        if (chosenPlayer.getIdentityCard().getIsRevealed()) {
+            this.displayMessage("This player has already revealed their identity. They are " + chosenPlayer.getIdentityCard().toString());
+            Console.menu(this);
+            return;
+        }
+        if (Main.getMode() == Constants.MODE_CMD) {
+            Console.menuAccused(chosenPlayer, this);
+        }
+    }
+
+    public void revealCardHunt() {
+        RumourCard card;
+
+        do {
+            card = this.pickCard(this.getNonRevealedCards());
+        } while (!card.isHuntEffectUsable(this));
+
+        while (!card.huntEffect(this));
+
+    }
+
+    public void revealCardWitch(Player accuser) {
+        RumourCard card;
+        do {
+            card = this.pickCard(this.getNonRevealedCards());
+        } while (!card.isWitchEffectUsable(this));
+
+        while(!card.witchEffect(this, accuser));
+    }
+
+    public void revealIdentity(Player accuser) {
+        this.getIdentityCard().revealIdentity();
+
+        if (this.getIdentityCard().getIdentity() == Identities.Villager) {
+            Game.getCurrentRound().setNextPlayer(this);
+            Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
+        } else {
+            accuser.addPoints(1);
+            Game.getCurrentRound().setNextPlayer(accuser);
+            Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
+            Game.getCurrentRound().getCurrentPlayers().remove(this);
+        }
     }
 }

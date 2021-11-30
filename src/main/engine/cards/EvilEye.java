@@ -7,6 +7,7 @@ public class EvilEye extends RumourCard {
     @Override
     public boolean witchEffect(Player owner, Player accuser) {
         Game.setNextPlayer(owner.choosePlayer());
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         this.setRevealed(true);
         return true;
     }
@@ -14,6 +15,7 @@ public class EvilEye extends RumourCard {
     @Override
     public boolean huntEffect(Player owner) {
         Game.setNextPlayer(owner.choosePlayer());
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         this.setRevealed(true);
         return true;
     }

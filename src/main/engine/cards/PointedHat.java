@@ -11,6 +11,7 @@ public class PointedHat extends RumourCard {
         RumourCard choice = owner.pickCard(owner.getRevealedCards());
         owner.getRumourCards().get(owner.getRumourCards().indexOf(choice)).setRevealed(false);
         Game.setNextPlayer(owner);
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         this.setRevealed(true);
         return true;
     }
@@ -20,6 +21,7 @@ public class PointedHat extends RumourCard {
         RumourCard choice = owner.pickCard(owner.getRevealedCards());
         owner.getRumourCards().get(owner.getRumourCards().indexOf(choice)).setRevealed(false);
         Game.setNextPlayer(owner.choosePlayer());
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         this.setRevealed(true);
         return true;
     }

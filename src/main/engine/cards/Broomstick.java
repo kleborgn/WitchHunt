@@ -9,6 +9,7 @@ public class Broomstick extends RumourCard {
     public boolean witchEffect(Player owner, Player accuser) {
         this.setRevealed(true);
         Game.setNextPlayer(owner);
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         return true;
     }
 
@@ -16,6 +17,7 @@ public class Broomstick extends RumourCard {
     public boolean huntEffect(Player owner) {
         this.setRevealed(true);
         Game.setNextPlayer(owner.choosePlayer());
+        Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         return true;
     }
 
