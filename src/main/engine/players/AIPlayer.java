@@ -7,38 +7,54 @@ import main.engine.cards.RumourCard;
 import java.util.ArrayList;
 
 public class AIPlayer extends Player {
+
+    private AIStrategy strat = new AIStrategyRandom();
+
     public AIPlayer(String name) {
         super(name);
     }
 
     @Override
-    public Player choosePlayer() {
-        return Game.getPlayers().get(Game.rand.nextInt(Game.getPlayers().size()));
-    }
-
-    @Override
-    public RumourCard pickCard(ArrayList<RumourCard> cards) {
-        return cards.get(Game.rand.nextInt(cards.size()));
-    }
-
-    @Override
     public void displayIdentity(Player who) {
-
+        //null
     }
 
     @Override
     public void displayMessage(String message) {
+        //null
+    }
 
+    @Override
+    public void accuseSomeone() {
+        strat.accuseSomeone(this);
+    }
+
+    @Override
+    public void revealCardHunt() {
+        strat.useHuntEffect(this);
+    }
+
+    @Override
+    public void revealCardWitch(Player accuser) {
+        strat.useWitchEffect(this, accuser);
     }
 
     @Override
     public void chooseIdentity() {
-        int randomN = Game.rand.nextInt(2);
+        strat.chooseIdentity(this);
+    }
 
-        if(randomN == 0) {
-            this.pickIdentity(Identities.Villager);
-        } else {
-            this.pickIdentity(Identities.Witch);
-        }
+    @Override
+    public Player choosePlayer() {
+        return strat.choosePlayer(this);
+    }
+
+    @Override
+    public RumourCard pickCard(ArrayList<RumourCard> cards) {
+        return strat.pickCard(cards);
+    }
+
+    public void aiPlayerChoice() {
+        strat.choice(this);
     }
 }

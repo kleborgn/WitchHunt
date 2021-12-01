@@ -1,6 +1,9 @@
 package main.engine.cards;
 
+import main.Main;
+import main.engine.Constants;
 import main.engine.Game;
+import main.engine.players.AIPlayer;
 import main.engine.players.Player;
 import main.hci.cmd.Console;
 
@@ -32,9 +35,15 @@ public class DuckingStool extends RumourCard {
 
         int choice = 0;
         do {
-            chosenPlayer.displayMessage("Reveal your identity (1) or discard a card (2).");
-            choice = Console.sc.nextInt();
-            Console.sc.nextLine();
+            if(Main.getMode() == Constants.MODE_CMD) {
+                if (chosenPlayer instanceof AIPlayer) {
+
+                } else {
+                    chosenPlayer.displayMessage("Reveal your identity (1) or discard a card (2).");
+                    choice = Console.sc.nextInt();
+                    Console.sc.nextLine();
+                }
+            }
         } while (choice < 1 || choice > 2);
 
         switch (choice) {
