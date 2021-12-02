@@ -1,6 +1,7 @@
 package main.engine;
 
 import main.engine.cards.*;
+import main.engine.players.AIPlayer;
 import main.engine.players.Player;
 import main.hci.cmd.Console;
 
@@ -24,9 +25,13 @@ public class Round {
             Console.clearScreen();
         }
         dealCards();
+        discardedCards = new ArrayList<RumourCard>();
         setNextPlayer(currentPlayers.get(Game.rand.nextInt(currentPlayers.size())));
         while (!isRoundEnd(currentPlayers)) {
-            Console.menu(nextPlayer);
+            if (!(nextPlayer instanceof AIPlayer))
+                Console.menu(nextPlayer);
+            else
+                ((AIPlayer) nextPlayer).aiPlayerChoice();
             if (isNeededToIncrementNextPlayer)
                 setNextPlayer(currentPlayers.get(currentPlayers.indexOf(nextPlayer) + 1));
             isNeededToIncrementNextPlayer = true;

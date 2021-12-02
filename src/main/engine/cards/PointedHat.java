@@ -18,6 +18,8 @@ public class PointedHat extends RumourCard {
 
     @Override
     public boolean huntEffect(Player owner) {
+        if (owner.getRevealedCards().isEmpty())
+            return false;
         RumourCard choice = owner.pickCard(owner.getRevealedCards());
         owner.getRumourCards().get(owner.getRumourCards().indexOf(choice)).setRevealed(false);
         Game.setNextPlayer(owner.choosePlayer());

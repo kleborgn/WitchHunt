@@ -17,7 +17,12 @@ public class Toad extends RumourCard {
         owner.getIdentityCard().revealIdentity();
 
         if (owner.getIdentityCard().getIdentity() == Identities.Witch) {
-            Game.setNextPlayer(Game.getPlayers().get(Game.getPlayers().indexOf(owner) - 1));
+            if (Game.getPlayers().indexOf(owner) == 0) {
+                Game.setNextPlayer(Game.getPlayers().get(Game.getPlayers().size() - 1)); // tour de table
+            } else {
+                Game.setNextPlayer(Game.getPlayers().get(Game.getPlayers().indexOf(owner) - 1));
+            }
+
             Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         } else {
             Game.setNextPlayer(owner.choosePlayer());

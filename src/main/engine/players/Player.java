@@ -133,37 +133,11 @@ public abstract class Player {
         return nonRevealedCards;
     }
 
-    public void accuseSomeone() {
-        Player chosenPlayer = this.choosePlayer();
-        if (chosenPlayer.getIdentityCard().getIsRevealed()) {
-            this.displayMessage("This player has already revealed their identity. They are " + chosenPlayer.getIdentityCard().toString());
-            Console.menu(this);
-            return;
-        }
-        if (Main.getMode() == Constants.MODE_CMD) {
-            Console.menuAccused(chosenPlayer, this);
-        }
-    }
+    public abstract void accuseSomeone();
 
-    public void revealCardHunt() {
-        RumourCard card;
+    public abstract void revealCardHunt();
 
-        do {
-            card = this.pickCard(this.getNonRevealedCards());
-        } while (!card.isHuntEffectUsable(this));
-
-        while (!card.huntEffect(this));
-
-    }
-
-    public void revealCardWitch(Player accuser) {
-        RumourCard card;
-        do {
-            card = this.pickCard(this.getNonRevealedCards());
-        } while (!card.isWitchEffectUsable(this));
-
-        while(!card.witchEffect(this, accuser));
-    }
+    public abstract void revealCardWitch(Player accuser);
 
     public void revealIdentity(Player accuser) {
         this.getIdentityCard().revealIdentity();
