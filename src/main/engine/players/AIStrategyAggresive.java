@@ -48,6 +48,6 @@ public class AIStrategyAggresive implements AIStrategy {
 
     @Override
     public int duckingStoolChoice(Player caller) {
-
+        return 0;
     }
 }

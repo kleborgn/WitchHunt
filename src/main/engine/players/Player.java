@@ -156,5 +156,5 @@ public abstract class Player {
         }
     }
 
-    public abstract void accused(Player chosenPlayer, Player caller);
+    public abstract void accused(Player accuser);
 }

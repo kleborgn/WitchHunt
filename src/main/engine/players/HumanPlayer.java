@@ -136,7 +136,7 @@ public class HumanPlayer extends Player {
 
     }
 
-    public void accused(Player caller, Player accuser) {
-        Console.menuAccused(caller, accuser);
+    public void accused(Player accuser) {
+        Console.menuAccused(this, accuser);
     }
 }

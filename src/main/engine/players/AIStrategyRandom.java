@@ -54,7 +54,7 @@ public class AIStrategyRandom implements AIStrategy {
         if (chosenPlayer.getIdentityCard().getIsRevealed())
             return false;
         caller.messageAll("I've accused " + chosenPlayer.getName());
-        chosenPlayer.accused(chosenPlayer, caller);
+        chosenPlayer.accused(caller);
         return true;
     }
 
