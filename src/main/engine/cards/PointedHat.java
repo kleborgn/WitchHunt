@@ -9,6 +9,8 @@ public class PointedHat extends RumourCard {
     @Override
     public boolean witchEffect(Player owner, Player accuser) {
         RumourCard choice = owner.pickCard(owner.getRevealedCards());
+        if (choice == null)
+            return false;
         owner.getRumourCards().get(owner.getRumourCards().indexOf(choice)).setRevealed(false);
         Game.setNextPlayer(owner);
         Game.getCurrentRound().setNeededToIncrementNextPlayer(false);

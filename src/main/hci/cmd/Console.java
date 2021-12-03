@@ -157,6 +157,7 @@ public class Console {
             }
 
             default -> {
+                boolean found = false;
                 for (RumourCard card : Game.getAllCards()) {
                     if (card.toString().equals(input)) {
                         System.out.println("Witch effect: " + card.witchEffectToString());
@@ -164,14 +165,17 @@ public class Console {
                         System.out.println("Side effect: " + card.sideEffectToString());
                         System.out.println("Press enter to continue...");
                         sc.nextLine();
+                        found = true;
                         menuAccused(caller, accuser);
                         break;
                     }
                 }
-                System.out.println("Unknown command.");
-                System.out.println("Press enter to continue...");
-                sc.nextLine();
-                menuAccused(caller, accuser);
+                if (!found) {
+                    System.out.println("Unknown command.");
+                    System.out.println("Press enter to continue...");
+                    sc.nextLine();
+                    menuAccused(caller, accuser);
+                }
             }
         }
     }

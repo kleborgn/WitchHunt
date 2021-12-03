@@ -44,6 +44,8 @@ public class AIStrategyRandom implements AIStrategy {
     @Override
     public boolean useWitchEffect(Player caller, Player accuser) {
         RumourCard card = pickCard(caller.getNonRevealedCards());
+        if (card == null)
+            return false;
         caller.messageAll("I've played a " + card.toString() + " card (witch effect).");
         return card.witchEffect(caller, accuser);
     }
@@ -65,6 +67,7 @@ public class AIStrategyRandom implements AIStrategy {
 
         if (randomN == 0) {
             while(!useWitchEffect(caller, accuser)) {
+                caller.messageAll("Failed.");
                 if (count > 2) {
                     accused(caller, accuser);
                     break;
@@ -83,6 +86,7 @@ public class AIStrategyRandom implements AIStrategy {
 
         if (randomN == 0) {
             while(!useHuntEffect(caller)) {
+                caller.messageAll("Failed.");
                 if (count > 2) {
                     choice(caller);
                     break;
