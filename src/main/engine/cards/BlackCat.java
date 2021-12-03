@@ -19,6 +19,8 @@ public class BlackCat extends RumourCard {
     @Override
     public boolean huntEffect(Player owner) {
         ArrayList<RumourCard> cards = Game.getDiscardedCards();
+        if (cards.isEmpty())
+            return false;
 
         owner.addCard(owner.pickCard(cards));
         owner.discardCard(this);

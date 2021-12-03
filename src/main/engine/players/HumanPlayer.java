@@ -104,6 +104,12 @@ public class HumanPlayer extends Player {
             Console.menu(this);
             return;
         }
+
+        if (chosenPlayer instanceof AIPlayer) {
+            ((AIPlayer) chosenPlayer).aiPlayerChoice();
+            return;
+        }
+
         if (Main.getMode() == Constants.MODE_CMD) {
             Console.menuAccused(chosenPlayer, this);
         }

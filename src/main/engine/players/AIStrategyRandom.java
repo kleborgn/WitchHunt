@@ -32,7 +32,9 @@ public class AIStrategyRandom implements AIStrategy {
 
     @Override
     public boolean useHuntEffect(Player caller) {
-        return pickCard(caller.getNonRevealedCards()).huntEffect(caller);
+        RumourCard card = pickCard(caller.getNonRevealedCards());
+
+        return card.huntEffect(caller);
     }
 
     @Override
