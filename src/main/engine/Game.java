@@ -81,6 +81,9 @@ public final class Game {
             currentRound = new Round(players);
             currentRound.startRound(players);
         }
+        if (Main.getMode() == Constants.MODE_CMD)
+            System.out.println(getWinner().getName() + " won!");
+        //TODO: gui
     }
 
     public static boolean isLastRound() {

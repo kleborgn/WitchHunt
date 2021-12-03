@@ -85,6 +85,7 @@ public class Console {
             }
 
             default -> {
+                boolean found = false;
                 for (RumourCard card : Game.getAllCards()) {
                     if (card.toString().equals(input)) {
                         System.out.println("Witch effect: " + card.witchEffectToString());
@@ -92,14 +93,18 @@ public class Console {
                         System.out.println("Side effect: " + card.sideEffectToString());
                         System.out.println("Press enter to continue...");
                         sc.nextLine();
+                        found = true;
                         menu(caller);
                         break;
                     }
                 }
-                System.out.println("Unknown command.");
-                System.out.println("Press enter to continue...");
-                sc.nextLine();
-                menu(caller);
+                if (!found) {
+                    System.out.println("Unknown command.");
+                    System.out.println("Press enter to continue...");
+                    sc.nextLine();
+                    menu(caller);
+                }
+
             }
         }
     }
@@ -124,7 +129,7 @@ public class Console {
                 }
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
-                menu(caller);
+                menuAccused(caller, accuser);
             }
 
             case "2" -> {
@@ -133,14 +138,14 @@ public class Console {
                 }
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
-                menu(caller);
+                menuAccused(caller, accuser);
             }
 
             case "3" -> {
                 System.out.println(caller.getIdentityCard().toString());
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
-                menu(caller);
+                menuAccused(caller, accuser);
             }
 
             case "4" -> {
@@ -159,14 +164,14 @@ public class Console {
                         System.out.println("Side effect: " + card.sideEffectToString());
                         System.out.println("Press enter to continue...");
                         sc.nextLine();
-                        menu(caller);
+                        menuAccused(caller, accuser);
                         break;
                     }
                 }
                 System.out.println("Unknown command.");
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
-                menu(caller);
+                menuAccused(caller, accuser);
             }
         }
     }

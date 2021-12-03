@@ -14,9 +14,10 @@ public class Toad extends RumourCard {
 
     @Override
     public boolean huntEffect(Player owner) {
-        owner.getIdentityCard().revealIdentity(owner);
+        owner.revealIdentity(owner);
 
         if (owner.getIdentityCard().getIdentity() == Identities.Witch) {
+            /*
             if (Game.getPlayers().indexOf(owner) == 0) {
                 Game.setNextPlayer(Game.getPlayers().get(Game.getPlayers().size() - 1)); // tour de table
             } else {
@@ -24,6 +25,8 @@ public class Toad extends RumourCard {
             }
 
             Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
+
+             */
         } else {
             Game.setNextPlayer(owner.choosePlayer());
             Game.getCurrentRound().setNeededToIncrementNextPlayer(false);

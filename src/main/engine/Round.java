@@ -103,6 +103,7 @@ public class Round {
         switch (currentPlayers.size()) {
             case 3 -> {
                 for (Player p:currentPlayers) {
+                    p.getRumourCards().clear();
                     for (int i = 0; i < 4; i++) {
                         randomN = Game.rand.nextInt(cards.size());
                         p.getRumourCards().add(cards.get(randomN));

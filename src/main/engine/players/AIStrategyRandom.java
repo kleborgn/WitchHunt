@@ -96,6 +96,6 @@ public class AIStrategyRandom implements AIStrategy {
 
     @Override
     public int duckingStoolChoice(Player caller) {
-        return Game.rand.nextInt(2);
+        return Game.rand.nextInt(2) + 1;
     }
 }
