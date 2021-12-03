@@ -47,7 +47,7 @@ public class AIStrategyAggresive implements AIStrategy {
     }
 
     @Override
-    public void duckingStoolChoice(Player caller) {
+    public int duckingStoolChoice(Player caller) {
 
     }
 }

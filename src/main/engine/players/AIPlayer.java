@@ -61,4 +61,8 @@ public class AIPlayer extends Player {
     public void aiPlayerChoice() {
         strat.choice(this);
     }
+
+    public int duckingStoolChoice() {
+        return strat.duckingStoolChoice(this);
+    }
 }

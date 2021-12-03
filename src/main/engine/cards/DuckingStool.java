@@ -37,7 +37,7 @@ public class DuckingStool extends RumourCard {
         do {
             if(Main.getMode() == Constants.MODE_CMD) {
                 if (chosenPlayer instanceof AIPlayer) {
-
+                    choice = ((AIPlayer) chosenPlayer).duckingStoolChoice();
                 } else {
                     chosenPlayer.displayMessage("Reveal your identity (1) or discard a card (2).");
                     choice = Console.sc.nextInt();

@@ -14,5 +14,5 @@ public interface AIStrategy {
     public void accused(Player caller, Player accuser);
 
     public void choice(Player caller);
-    public void duckingStoolChoice(Player caller);
+    public int duckingStoolChoice(Player caller);
 }

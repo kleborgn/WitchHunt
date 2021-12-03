@@ -155,4 +155,6 @@ public abstract class Player {
             Game.getCurrentRound().getCurrentPlayers().remove(this);
         }
     }
+
+    public abstract void accused(Player chosenPlayer, Player caller);
 }

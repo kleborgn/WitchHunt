@@ -54,7 +54,7 @@ public class AIStrategyRandom implements AIStrategy {
         if (chosenPlayer.getIdentityCard().getIsRevealed())
             return false;
         caller.messageAll("I've accused " + chosenPlayer.getName());
-        accused(chosenPlayer, caller);
+        chosenPlayer.accused(chosenPlayer, caller);
         return true;
     }
 
@@ -95,7 +95,7 @@ public class AIStrategyRandom implements AIStrategy {
     }
 
     @Override
-    public void duckingStoolChoice(Player caller) {
-
+    public int duckingStoolChoice(Player caller) {
+        return Game.rand.nextInt(2);
     }
 }
