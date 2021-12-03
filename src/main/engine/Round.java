@@ -35,8 +35,13 @@ public class Round {
                 Console.menu(nextPlayer);
             else
                 ((AIPlayer) nextPlayer).aiPlayerChoice();
-            if (isNeededToIncrementNextPlayer)
-                setNextPlayer(currentPlayers.get(currentPlayers.indexOf(nextPlayer) + 1));
+            if (isNeededToIncrementNextPlayer) {
+                if (Game.getPlayers().indexOf(nextPlayer) == Game.getPlayers().size()-1) {
+                    setNextPlayer(currentPlayers.get(0));
+                } else {
+                    setNextPlayer(currentPlayers.get(currentPlayers.indexOf(nextPlayer) + 1));
+                }
+            }
             isNeededToIncrementNextPlayer = true;
             Console.clearScreen();
         }
