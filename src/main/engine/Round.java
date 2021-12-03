@@ -24,8 +24,9 @@ public class Round {
             p.chooseIdentity();
             Console.clearScreen();
         }
-        dealCards();
         discardedCards = new ArrayList<RumourCard>();
+        dealCards();
+
         setNextPlayer(currentPlayers.get(Game.rand.nextInt(currentPlayers.size())));
         while (!isRoundEnd(currentPlayers)) {
             if (!(nextPlayer instanceof AIPlayer))
