@@ -26,7 +26,7 @@ public class AngryMob extends RumourCard {
             return false;
         }
 
-        selected.getIdentityCard().revealIdentity(selected);
+        selected.revealIdentity(selected);
         if (selected.getIdentityCard().getIdentity() == Identities.Witch)
             owner.addPoints(2);
         if (selected.getIdentityCard().getIdentity() == Identities.Villager)
