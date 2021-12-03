@@ -106,7 +106,7 @@ public class HumanPlayer extends Player {
         }
 
         if (chosenPlayer instanceof AIPlayer) {
-            ((AIPlayer) chosenPlayer).aiPlayerChoice();
+            ((AIPlayer) chosenPlayer).accused(this);
             return;
         }
 

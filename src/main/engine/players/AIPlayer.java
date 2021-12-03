@@ -39,6 +39,10 @@ public class AIPlayer extends Player {
         strat.useWitchEffect(this, accuser);
     }
 
+    public void accused(Player accuser) {
+        strat.accused(this, accuser);
+    }
+
     @Override
     public void chooseIdentity() {
         strat.chooseIdentity(this);

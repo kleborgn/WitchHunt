@@ -3,6 +3,8 @@ package main.engine.cards;
 import main.engine.Game;
 import main.engine.players.Player;
 
+import java.util.ArrayList;
+
 public class PetNewt extends RumourCard {
     @Override
     public boolean witchEffect(Player owner, Player accuser) {
@@ -14,7 +16,10 @@ public class PetNewt extends RumourCard {
 
     @Override
     public boolean huntEffect(Player owner) {
-        RumourCard card = owner.pickCard(Game.getCurrentRound().getAllRevealedRumourCards());
+        ArrayList<RumourCard> cards = Game.getCurrentRound().getAllRevealedRumourCards();
+        if (cards.isEmpty())
+            return false;
+        RumourCard card = owner.pickCard(cards);
         card.setRevealed(false);
         for (Player p:Game.getPlayers()) {
             if (p.getRevealedCards().contains(card)) {

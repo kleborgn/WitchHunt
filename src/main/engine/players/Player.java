@@ -124,6 +124,11 @@ public abstract class Player {
 
     public abstract void displayMessage(String message);
 
+    public void messageAll(String message) {
+        if (Main.getMode() == Constants.MODE_CMD)
+            System.out.println(this.getName() + " said: " + message);
+    }
+
     public ArrayList<RumourCard> getNonRevealedCards() {
         ArrayList<RumourCard> nonRevealedCards = new ArrayList<RumourCard>();
         for (RumourCard card:rumourCards) {

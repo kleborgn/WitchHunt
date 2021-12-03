@@ -33,13 +33,15 @@ public class AIStrategyRandom implements AIStrategy {
     @Override
     public boolean useHuntEffect(Player caller) {
         RumourCard card = pickCard(caller.getNonRevealedCards());
-
+        caller.messageAll("I've played a " + card.toString() + " card (hunt effect).");
         return card.huntEffect(caller);
     }
 
     @Override
     public boolean useWitchEffect(Player caller, Player accuser) {
-        return pickCard(caller.getNonRevealedCards()).witchEffect(caller, accuser);
+        RumourCard card = pickCard(caller.getNonRevealedCards());
+        caller.messageAll("I've played a " + card.toString() + " card (hunt effect).");
+        return card.witchEffect(caller, accuser);
     }
 
     @Override
@@ -47,6 +49,7 @@ public class AIStrategyRandom implements AIStrategy {
         Player chosenPlayer = choosePlayer(caller);
         if (chosenPlayer.getIdentityCard().getIsRevealed())
             return false;
+        caller.messageAll("I've accused " + chosenPlayer.getName());
         accused(chosenPlayer, caller);
         return true;
     }
