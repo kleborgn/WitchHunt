@@ -17,7 +17,7 @@ public class Cauldron extends RumourCard {
 
     @Override
     public boolean huntEffect(Player owner) {
-        owner.getIdentityCard().revealIdentity();
+        owner.getIdentityCard().revealIdentity(owner);
 
         if (owner.getIdentityCard().getIdentity() == Identities.Witch) {
             Game.setNextPlayer(Game.getPlayers().get(Game.getPlayers().indexOf(owner) - 1));

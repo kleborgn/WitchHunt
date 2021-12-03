@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class AIStrategyRandom implements AIStrategy {
     public RumourCard pickCard(ArrayList<RumourCard> cards) {
+        if (cards.isEmpty())
+            return null;
         return cards.get(Game.rand.nextInt(cards.size()));
     }
 
@@ -33,6 +35,8 @@ public class AIStrategyRandom implements AIStrategy {
     @Override
     public boolean useHuntEffect(Player caller) {
         RumourCard card = pickCard(caller.getNonRevealedCards());
+        if (card == null)
+            return false;
         caller.messageAll("I've played a " + card.toString() + " card (hunt effect).");
         return card.huntEffect(caller);
     }
@@ -40,7 +44,7 @@ public class AIStrategyRandom implements AIStrategy {
     @Override
     public boolean useWitchEffect(Player caller, Player accuser) {
         RumourCard card = pickCard(caller.getNonRevealedCards());
-        caller.messageAll("I've played a " + card.toString() + " card (hunt effect).");
+        caller.messageAll("I've played a " + card.toString() + " card (witch effect).");
         return card.witchEffect(caller, accuser);
     }
 
@@ -57,9 +61,16 @@ public class AIStrategyRandom implements AIStrategy {
     @Override
     public void accused(Player caller, Player accuser) {
         int randomN = Game.rand.nextInt(2);
+        int count = 0;
 
         if (randomN == 0) {
-            while(!useWitchEffect(caller, accuser));
+            while(!useWitchEffect(caller, accuser)) {
+                if (count > 2) {
+                    accused(caller, accuser);
+                    break;
+                }
+                count++;
+            }
         } else {
             caller.revealIdentity(accuser);
         }
@@ -68,9 +79,16 @@ public class AIStrategyRandom implements AIStrategy {
     @Override
     public void choice(Player caller) {
         int randomN = Game.rand.nextInt(2);
+        int count = 0;
 
         if (randomN == 0) {
-            while(!useHuntEffect(caller));
+            while(!useHuntEffect(caller)) {
+                if (count > 2) {
+                    choice(caller);
+                    break;
+                }
+                count++;
+            }
         } else {
             while(!accuseSomeone(caller));
         }

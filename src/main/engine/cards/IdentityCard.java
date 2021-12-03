@@ -2,6 +2,7 @@ package main.engine.cards;
 
 import main.Main;
 import main.engine.Constants;
+import main.engine.players.Player;
 
 public class IdentityCard {
     Identities identity;
@@ -16,10 +17,10 @@ public class IdentityCard {
         return isRevealed;
     }
 
-    public void revealIdentity() {
+    public void revealIdentity(Player owner) {
         this.isRevealed = true;
         if(Main.getMode() == Constants.MODE_CMD)
-            System.out.println(this.toString());
+            owner.messageAll("Im a " + this.toString());
         //TODO: gui mode
     }
 

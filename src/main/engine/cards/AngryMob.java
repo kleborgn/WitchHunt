@@ -1,7 +1,5 @@
 package main.engine.cards;
 
-import main.Main;
-import main.engine.Constants;
 import main.engine.Game;
 import main.engine.players.Player;
 
@@ -28,7 +26,7 @@ public class AngryMob extends RumourCard {
             return false;
         }
 
-        selected.getIdentityCard().revealIdentity();
+        selected.getIdentityCard().revealIdentity(selected);
         if (selected.getIdentityCard().getIdentity() == Identities.Witch)
             owner.addPoints(2);
         if (selected.getIdentityCard().getIdentity() == Identities.Villager)

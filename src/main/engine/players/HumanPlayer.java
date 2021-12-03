@@ -121,9 +121,9 @@ public class HumanPlayer extends Player {
 
         do {
             card = this.pickCard(this.getNonRevealedCards());
-        } while (!card.isHuntEffectUsable(this));
+        } while (!card.huntEffect(this));//while (!card.isHuntEffectUsable(this));
 
-        while (!card.huntEffect(this));
+
     }
 
     @Override
@@ -131,8 +131,8 @@ public class HumanPlayer extends Player {
         RumourCard card;
         do {
             card = this.pickCard(this.getNonRevealedCards());
-        } while (!card.isWitchEffectUsable(this));
+        } while(!card.witchEffect(this, accuser));//while (!card.isWitchEffectUsable(this));
 
-        while(!card.witchEffect(this, accuser));
+
     }
 }

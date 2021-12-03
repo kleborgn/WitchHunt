@@ -48,7 +48,7 @@ public class DuckingStool extends RumourCard {
 
         switch (choice) {
             case 1-> {
-                chosenPlayer.getIdentityCard().revealIdentity();
+                chosenPlayer.getIdentityCard().revealIdentity(chosenPlayer);
                 if (chosenPlayer.getIdentityCard().getIdentity() == Identities.Witch) {
                     owner.addPoints(1);
                     Game.setNextPlayer(owner);

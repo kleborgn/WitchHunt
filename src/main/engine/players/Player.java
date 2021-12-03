@@ -4,10 +4,8 @@ import main.Main;
 import main.engine.Constants;
 import main.engine.Game;
 import main.engine.cards.*;
-import main.hci.cmd.Console;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 public abstract class Player {
@@ -145,7 +143,7 @@ public abstract class Player {
     public abstract void revealCardWitch(Player accuser);
 
     public void revealIdentity(Player accuser) {
-        this.getIdentityCard().revealIdentity();
+        this.getIdentityCard().revealIdentity(this);
 
         if (this.getIdentityCard().getIdentity() == Identities.Villager) {
             Game.getCurrentRound().setNextPlayer(this);

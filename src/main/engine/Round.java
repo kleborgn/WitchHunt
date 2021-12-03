@@ -4,6 +4,7 @@ import main.engine.cards.*;
 import main.engine.players.AIPlayer;
 import main.engine.players.Player;
 import main.hci.cmd.Console;
+import main.hci.cmd.Debug;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ public class Round {
 
         setNextPlayer(currentPlayers.get(Game.rand.nextInt(currentPlayers.size())));
         while (!isRoundEnd(currentPlayers)) {
+            Debug.info(nextPlayer.getName());
             if (!(nextPlayer instanceof AIPlayer))
                 Console.menu(nextPlayer);
             else
