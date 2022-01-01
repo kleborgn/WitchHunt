@@ -13,10 +13,18 @@ public class IdentityCard {
         this.isRevealed = false;
     }
 
+    /**
+     * Get the revealed state of the card
+     * @return revealed state
+     */
     public boolean getIsRevealed() {
         return isRevealed;
     }
 
+    /**
+     * Reveal the card
+     * @param owner owner
+     */
     public void revealIdentity(Player owner) {
         this.isRevealed = true;
         if(Main.getMode() == Constants.MODE_CMD)
@@ -24,10 +32,17 @@ public class IdentityCard {
         //TODO: gui mode
     }
 
+    /**
+     * Hide the card
+     */
     public void hideIdentity() {
         this.isRevealed = false;
     }
 
+    /**
+     * Get the identity
+     * @return identity
+     */
     public Identities getIdentity() {
         return identity;
     }

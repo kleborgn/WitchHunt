@@ -31,6 +31,9 @@ public final class Game {
         initCards();
     }
 
+    /**
+     * Init the array with all cards
+     */
     private static void initCards() {
         allCards = new ArrayList<RumourCard>();
         allCards.add(new AngryMob());
@@ -47,6 +50,12 @@ public final class Game {
         allCards.add(new Wart());
     }
 
+    /**
+     * Create a new game
+     * @param nbPlayers
+     * @param nbHumans
+     * @param nbAI
+     */
     public static void createGame(int nbPlayers, int nbHumans, int nbAI) {
         if(game == null) {
             game = new Game(nbPlayers, nbHumans, nbAI);
@@ -55,6 +64,11 @@ public final class Game {
         }
     }
 
+    /**
+     * Create the player list
+     * @param nbHumans
+     * @param nbAI
+     */
     private static void createPlayerList(int nbHumans, int nbAI) {
         String name;
         if (players != null)
@@ -76,6 +90,9 @@ public final class Game {
         }
     }
 
+    /**
+     * Start the game
+     */
     public static void startGame() {
         while(!isLastRound()) {
             currentRound = new Round(players);
@@ -86,6 +103,9 @@ public final class Game {
         //TODO: gui
     }
 
+    /**
+     * @return Check if it's the last round
+     */
     public static boolean isLastRound() {
         int maxScore = 0;
         for (Player player:players) {
@@ -105,6 +125,10 @@ public final class Game {
 
     }
 
+    /**
+     * Get the winner
+     * @return winner
+     */
     public static Player getWinner() {
         Player maxScorePlayer = players.get(0);
         if (tiePlayers.size() > 1) {

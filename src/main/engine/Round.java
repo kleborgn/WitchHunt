@@ -20,6 +20,10 @@ public class Round {
         this.currentPlayers = players;
     }
 
+    /**
+     * Start a round
+     * @param players
+     */
     public void startRound(ArrayList<Player> players) {
         for (Player p:currentPlayers) {
             p.chooseIdentity();
@@ -48,6 +52,11 @@ public class Round {
         dealPoints();
     }
 
+    /**
+     * Check if the round is over
+     * @param players
+     * @return
+     */
     public boolean isRoundEnd(ArrayList<Player> players) {
         int nbUnrevealedPlayers = 0;
         for (Player player:players) {
@@ -60,6 +69,9 @@ public class Round {
         return true;
     }
 
+    /**
+     * Deal points to players
+     */
     public void dealPoints() {
         Player winner = currentPlayers.get(0);
         if (winner.getIdentityCard().getIdentity() == Identities.Witch) {
@@ -95,6 +107,9 @@ public class Round {
         return result;
     }
 
+    /**
+     * Deal cards to players
+     */
     public void dealCards() {
         ArrayList<RumourCard> cards = new ArrayList<RumourCard>();
         cards.addAll(Game.getAllCards());
