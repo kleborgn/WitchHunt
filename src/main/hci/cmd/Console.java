@@ -1,5 +1,6 @@
 package main.hci.cmd;
 
+import main.RoundGUI;
 import main.engine.Game;
 import main.engine.cards.RumourCard;
 import main.engine.players.Player;
@@ -55,6 +56,12 @@ public class Console {
                 for (RumourCard card: caller.getNonRevealedCards()) {
                     System.out.println(card.toString());
                 }
+                RoundGUI roundGui = new RoundGUI();
+                roundGui.setVisible(true);
+                roundGui.pack();
+                roundGui.setTitle("Witch Hunt");
+                roundGui.changeCardList(caller.getNonRevealedCards());
+
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
                 menu(caller);
@@ -127,6 +134,11 @@ public class Console {
                 for (RumourCard card: caller.getNonRevealedCards()) {
                     System.out.println(card.toString());
                 }
+                RoundGUI roundGui = new RoundGUI();
+                roundGui.setVisible(true);
+                roundGui.pack();
+                roundGui.setTitle("Witch Hunt");
+                roundGui.changeCardList(caller.getNonRevealedCards());
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
                 menuAccused(caller, accuser);
