@@ -1,9 +1,10 @@
 package main.hci.cmd;
 
-import main.RoundGUI;
+import main.vue.RoundGUI;
 import main.engine.Game;
 import main.engine.cards.RumourCard;
 import main.engine.players.Player;
+import main.vue.SetupGUI;
 
 import java.util.Scanner;
 
@@ -11,6 +12,13 @@ public class Console {
     public static Scanner sc = new Scanner(System.in);
 
     public static void initGame() {
+
+        SetupGUI setupGUI = new SetupGUI();
+        setupGUI.setVisible(true);
+        setupGUI.pack();
+        setupGUI.setTitle("Witch Hunt");
+        setupGUI.setSize(1280,720);
+
         int nbPlayers, nbHumans, nbAI = 0;
         do {
             System.out.println("Total number of players (3-6):");
@@ -60,7 +68,9 @@ public class Console {
                 roundGui.setVisible(true);
                 roundGui.pack();
                 roundGui.setTitle("Witch Hunt");
-                roundGui.changeCardList(caller.getNonRevealedCards());
+                roundGui.setSize(1280,720);
+                roundGui.setCardList(caller.getNonRevealedCards());
+                roundGui.setPlayersList(Game.getPlayers());
 
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
@@ -137,8 +147,10 @@ public class Console {
                 RoundGUI roundGui = new RoundGUI();
                 roundGui.setVisible(true);
                 roundGui.pack();
+                roundGui.setSize(1280,720);
                 roundGui.setTitle("Witch Hunt");
-                roundGui.changeCardList(caller.getNonRevealedCards());
+                roundGui.setCardList(caller.getNonRevealedCards());
+                roundGui.setPlayersList(Game.getPlayers());
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
                 menuAccused(caller, accuser);
