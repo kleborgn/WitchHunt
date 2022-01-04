@@ -3,6 +3,7 @@ package main;
 import main.engine.Constants;
 import main.hci.cmd.Console;
 import main.hci.cmd.Debug;
+import main.vue.GUI;
 
 import java.util.Objects;
 
@@ -26,8 +27,7 @@ public class Main {
                 }
                 case "--gui" -> {
                     isGUIMode = true;
-                    //TODO: call main window
-                    System.out.println("Not implemented yet");
+                    GUI.initGame();
                 }
                 default -> System.out.println("Unrecognized argument");
             }

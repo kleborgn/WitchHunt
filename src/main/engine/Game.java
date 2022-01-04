@@ -6,6 +6,7 @@ import main.engine.players.HumanPlayer;
 import main.engine.players.Player;
 import main.hci.cmd.Console;
 import main.Main;
+import main.vue.RoundGUI;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -56,10 +57,10 @@ public final class Game {
      * @param nbHumans
      * @param nbAI
      */
-    public static void createGame(int nbPlayers, int nbHumans, int nbAI) {
+    public static void createGame(int nbPlayers, int nbHumans, int nbAI, ArrayList<String> playerNames) {
         if(game == null) {
             game = new Game(nbPlayers, nbHumans, nbAI);
-            createPlayerList(nbHumans, nbAI);
+            createPlayerList(nbHumans, nbPlayers, playerNames);
             tiePlayers = new ArrayList<Player>();
         }
     }
@@ -69,7 +70,7 @@ public final class Game {
      * @param nbHumans
      * @param nbAI
      */
-    private static void createPlayerList(int nbHumans, int nbAI) {
+    private static void createPlayerList(int nbHumans, int nbAI, ArrayList<String> playerNames) {
         String name;
         if (players != null)
             return;
@@ -81,8 +82,9 @@ public final class Game {
                     name = Console.sc.next();
                 } while(getPlayerByName(name) != null);
                 players.add(new HumanPlayer(name));
+            } else if (Main.getMode() == Constants.MODE_GUI){
+                players.add(new HumanPlayer(playerNames.get(i)));
             }
-            //TODO: add GUI input
         }
 
         for (int i = 0; i < nbAI; i++) {
@@ -100,7 +102,13 @@ public final class Game {
         }
         if (Main.getMode() == Constants.MODE_CMD)
             System.out.println(getWinner().getName() + " won!");
-        //TODO: gui
+        if (Main.getMode() == Constants.MODE_GUI) {
+            RoundGUI roundGui = new RoundGUI();
+            roundGui.setVisible(true);
+            roundGui.pack();
+            roundGui.setTitle("Witch Hunt");
+            roundGui.setSize(1280,720);
+        }
     }
 
     /**

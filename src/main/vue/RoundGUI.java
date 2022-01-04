@@ -117,7 +117,6 @@ public class RoundGUI extends JFrame {
         for(int i = 0; i < currentPlayerList.size(); i++){
             switch (i){
                 case 0:
-                    System.out.println("On arrive là ?");
                     player1NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true){
                         player1RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
@@ -126,7 +125,6 @@ public class RoundGUI extends JFrame {
                     }
                     player1ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
                 case 1:
-                    System.out.println("On arrive là ?");
                     player2NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true){
                         player2RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
@@ -135,7 +133,6 @@ public class RoundGUI extends JFrame {
                     }
                     player2ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());//currentPlayerCard2Label.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentPlayerCardList.get(i).toString() + ".png")));
                 case 2:
-                    System.out.println("On arrive là ?");
                     player3NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true){
                         player3RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
@@ -144,7 +141,6 @@ public class RoundGUI extends JFrame {
                     }
                     player3ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
                 case 3:
-                    System.out.println("On arrive là ?");
                     player4NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true){
                         player4RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
@@ -153,7 +149,6 @@ public class RoundGUI extends JFrame {
                     }
                     player4ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
                 case 4:
-                    System.out.println("On arrive là ?");
                     player5NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true){
                         player5RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
@@ -162,7 +157,6 @@ public class RoundGUI extends JFrame {
                     }
                     player5ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
                 case 5:
-                    System.out.println("On arrive là ?");
                     player6NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true){
                         player6RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());

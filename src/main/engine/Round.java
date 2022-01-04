@@ -1,10 +1,12 @@
 package main.engine;
 
+import main.Main;
 import main.engine.cards.*;
 import main.engine.players.AIPlayer;
 import main.engine.players.Player;
 import main.hci.cmd.Console;
 import main.hci.cmd.Debug;
+import main.vue.RoundGUI;
 
 import java.util.ArrayList;
 
@@ -25,10 +27,24 @@ public class Round {
      * @param players
      */
     public void startRound(ArrayList<Player> players) {
-        for (Player p:currentPlayers) {
-            p.chooseIdentity();
-            Console.clearScreen();
+        if (Main.getMode() == Constants.MODE_CMD) {
+            for (Player p:currentPlayers) {
+                p.chooseIdentity();
+                Console.clearScreen();
+            }
         }
+        if (Main.getMode() == Constants.MODE_GUI) {
+            for (Player p:currentPlayers) {
+                p.pickIdentity(Identities.Witch);
+                //TODO : Testing only
+            }
+        }
+        RoundGUI roundGui = new RoundGUI();
+        roundGui.setVisible(true);
+        roundGui.pack();
+        roundGui.setTitle("Witch Hunt");
+        roundGui.setSize(1280,720);
+        roundGui.setPlayersList(currentPlayers);
         discardedCards = new ArrayList<RumourCard>();
         dealCards();
 
@@ -36,7 +52,11 @@ public class Round {
         while (!isRoundEnd(currentPlayers)) {
             Debug.info(nextPlayer.getName());
             if (!(nextPlayer instanceof AIPlayer))
-                Console.menu(nextPlayer);
+                if (Main.getMode() == Constants.MODE_CMD) {
+                    Console.menu(nextPlayer);
+                }
+                else if (Main.getMode() == Constants.MODE_GUI) {
+                }
             else
                 ((AIPlayer) nextPlayer).aiPlayerChoice();
             if (isNeededToIncrementNextPlayer) {
@@ -59,7 +79,9 @@ public class Round {
      */
     public boolean isRoundEnd(ArrayList<Player> players) {
         int nbUnrevealedPlayers = 0;
+        System.out.println(players);
         for (Player player:players) {
+            System.out.println(player);
             if (!player.getIdentityCard().getIsRevealed()) {
                 nbUnrevealedPlayers++;
             }

@@ -34,7 +34,7 @@ public class Console {
 
         nbAI = nbPlayers - nbHumans;
 
-        Game.createGame(nbPlayers, nbHumans, nbAI);
+        Game.createGame(nbPlayers, nbHumans, nbAI, null);
         Game.startGame();
         Debug.warning("END");
         sc.close();
@@ -64,13 +64,6 @@ public class Console {
                 for (RumourCard card: caller.getNonRevealedCards()) {
                     System.out.println(card.toString());
                 }
-                RoundGUI roundGui = new RoundGUI();
-                roundGui.setVisible(true);
-                roundGui.pack();
-                roundGui.setTitle("Witch Hunt");
-                roundGui.setSize(1280,720);
-                roundGui.setCardList(caller.getNonRevealedCards());
-                roundGui.setPlayersList(Game.getPlayers());
 
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
