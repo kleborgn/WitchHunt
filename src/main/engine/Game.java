@@ -60,7 +60,7 @@ public final class Game {
     public static void createGame(int nbPlayers, int nbHumans, int nbAI, ArrayList<String> playerNames) {
         if(game == null) {
             game = new Game(nbPlayers, nbHumans, nbAI);
-            createPlayerList(nbHumans, nbPlayers, playerNames);
+            createPlayerList(nbHumans, nbAI, playerNames);
             tiePlayers = new ArrayList<Player>();
         }
     }
@@ -88,6 +88,7 @@ public final class Game {
         }
 
         for (int i = 0; i < nbAI; i++) {
+            System.out.println("Cest les bots");
             players.add(new AIPlayer("BOT " + (i+1)));
         }
     }
@@ -102,13 +103,6 @@ public final class Game {
         }
         if (Main.getMode() == Constants.MODE_CMD)
             System.out.println(getWinner().getName() + " won!");
-        if (Main.getMode() == Constants.MODE_GUI) {
-            RoundGUI roundGui = new RoundGUI();
-            roundGui.setVisible(true);
-            roundGui.pack();
-            roundGui.setTitle("Witch Hunt");
-            roundGui.setSize(1280,720);
-        }
     }
 
     /**

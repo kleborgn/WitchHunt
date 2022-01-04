@@ -49,16 +49,20 @@ public class Round {
         dealCards();
 
         setNextPlayer(currentPlayers.get(Game.rand.nextInt(currentPlayers.size())));
-        while (!isRoundEnd(currentPlayers)) {
+//        while (!isRoundEnd(currentPlayers)) {
+        while (true) {
             Debug.info(nextPlayer.getName());
-            if (!(nextPlayer instanceof AIPlayer))
+            if (!(nextPlayer instanceof AIPlayer)) {
                 if (Main.getMode() == Constants.MODE_CMD) {
                     Console.menu(nextPlayer);
                 }
-                else if (Main.getMode() == Constants.MODE_GUI) {
+                else {
+//                    roundGui.setCardList(nextPlayer.getRumourCards());
                 }
-            else
+            }
+            else {
                 ((AIPlayer) nextPlayer).aiPlayerChoice();
+            }
             if (isNeededToIncrementNextPlayer) {
                 if (Game.getPlayers().indexOf(nextPlayer) == Game.getPlayers().size()-1) {
                     setNextPlayer(currentPlayers.get(0));
@@ -66,10 +70,10 @@ public class Round {
                     setNextPlayer(currentPlayers.get(currentPlayers.indexOf(nextPlayer) + 1));
                 }
             }
-            isNeededToIncrementNextPlayer = true;
+//            isNeededToIncrementNextPlayer = true;
             Console.clearScreen();
         }
-        dealPoints();
+//        dealPoints();
     }
 
     /**
@@ -79,9 +83,7 @@ public class Round {
      */
     public boolean isRoundEnd(ArrayList<Player> players) {
         int nbUnrevealedPlayers = 0;
-        System.out.println(players);
         for (Player player:players) {
-            System.out.println(player);
             if (!player.getIdentityCard().getIsRevealed()) {
                 nbUnrevealedPlayers++;
             }

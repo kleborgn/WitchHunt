@@ -50,27 +50,21 @@ public class SetupGUI extends JFrame {
         if (player1NameTextField.getText().equals("") == false){
             playerNames.add(player1NameTextField.getText());
         }
-        System.out.println(playerNames);
         if (player2NameTextField.getText().equals("") == false){
             playerNames.add(player2NameTextField.getText());
         }
-        System.out.println(playerNames);
         if (player3NameTextField.getText().equals("") == false){
             playerNames.add(player3NameTextField.getText());
         }
-        System.out.println(playerNames);
         if (player4NameTextField.getText().equals("") == false){
             playerNames.add(player4NameTextField.getText());
         }
-        System.out.println(playerNames);
         if (player5NameTextField.getText().equals("") == false){
             playerNames.add(player5NameTextField.getText());
         }
-        System.out.println(playerNames);
         if (player6NameTextField.getText().equals("") == false){
             playerNames.add(player6NameTextField.getText());
         }
-        System.out.println(playerNames);
         Game.createGame(3,3, 0, playerNames);
         Game.startGame();
     }

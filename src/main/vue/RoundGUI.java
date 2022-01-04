@@ -105,15 +105,11 @@ public class RoundGUI extends JFrame {
                 case 3:
                     currentPlayerCard4Label.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentPlayerCardList.get(i).toString() + ".png")));
                 default:
-                    System.out.println(i);
-                    System.out.println("Euh y'a trop de cartes là");
-                    System.out.println(currentPlayerCardList.get(i).toString());
             }
         }
     }
 
     public void setPlayersList(ArrayList<Player> currentPlayerList){
-        System.out.println(currentPlayerList.size());
         for(int i = 0; i < currentPlayerList.size(); i++){
             switch (i){
                 case 0:

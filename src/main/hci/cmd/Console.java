@@ -16,7 +16,7 @@ public class Console {
         SetupGUI setupGUI = new SetupGUI();
         setupGUI.setVisible(true);
         setupGUI.pack();
-        setupGUI.setTitle("Witch Hunt");
+        setupGUI.setTitle("Witch Hunt Setup");
         setupGUI.setSize(1280,720);
 
         int nbPlayers, nbHumans, nbAI = 0;
@@ -137,13 +137,6 @@ public class Console {
                 for (RumourCard card: caller.getNonRevealedCards()) {
                     System.out.println(card.toString());
                 }
-                RoundGUI roundGui = new RoundGUI();
-                roundGui.setVisible(true);
-                roundGui.pack();
-                roundGui.setSize(1280,720);
-                roundGui.setTitle("Witch Hunt");
-                roundGui.setCardList(caller.getNonRevealedCards());
-                roundGui.setPlayersList(Game.getPlayers());
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
                 menuAccused(caller, accuser);
