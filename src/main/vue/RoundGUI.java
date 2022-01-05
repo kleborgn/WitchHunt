@@ -59,40 +59,12 @@ public class RoundGUI extends JFrame {
     private ImageIcon iconCurrentPlayerCard4;
 
     public RoundGUI(){
-//
-//        iconCurrentPlayerCard1 = new ImageIcon(getClass().getResource("assets/Angry Mob.png"));
-//
-//        currentPlayerCard1Label.setIcon(iconCurrentPlayerCard1);
-//
-//        currentPlayerHand.add(currentPlayerCard1Label);
-//
-//        iconCurrentPlayerCard2 = new ImageIcon(getClass().getResource("assets/Black Cat.png"));
-//
-//        currentPlayerCard2.setIcon(iconCurrentPlayerCard2);
-//        currentPlayerHand.add(currentPlayerCard2, new GridConstraints());
-//
-//        iconCurrentPlayerCard3 = new ImageIcon(getClass().getResource("assets/Broomstick.png"));
-//
-//        currentPlayerCard3.setIcon(iconCurrentPlayerCard3);
-//        currentPlayerHand.add(currentPlayerCard3, new GridConstraints());
-//
-//        iconCurrentPlayerCard4 = new ImageIcon(getClass().getResource("assets/Cauldron.png"));
-//
-//        currentPlayerCard4.setIcon(iconCurrentPlayerCard4);
-//        currentPlayerHand.add(currentPlayerCard4, new GridConstraints());
-//
-//        ArrayList<JLabel> cardsToAdd = new ArrayList<JLabel>();
-//        cardsToAdd.add(currentPlayerCard1Label);
-//        cardsToAdd.add(currentPlayerCard2);
-//        cardsToAdd.add(currentPlayerCard3);
-//        cardsToAdd.add(currentPlayerCard4);
-//        currentPlayerPanel.add(currentPlayerHand);
-//        globalPanel.add(currentPlayerHand);
         add(globalPanel);
         validate();
     }
 
     public void setCardList(ArrayList<RumourCard> currentPlayerCardList){
+        System.out.println(currentPlayerCardList);
         currentPlayerCard1Label.setIcon(null);
         currentPlayerCard2Label.setIcon(null);
         currentPlayerCard3Label.setIcon(null);
@@ -101,15 +73,20 @@ public class RoundGUI extends JFrame {
             switch (i){
                 case 0:
                     currentPlayerCard1Label.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentPlayerCardList.get(i).toString() + ".png")));
+                    break;
                 case 1:
                     currentPlayerCard2Label.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentPlayerCardList.get(i).toString() + ".png")));
+                    break;
                 case 2:
                     currentPlayerCard3Label.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentPlayerCardList.get(i).toString() + ".png")));
+                    break;
                 case 3:
                     currentPlayerCard4Label.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentPlayerCardList.get(i).toString() + ".png")));
+                    break;
                 default:
             }
         }
+        System.out.println(currentPlayerCard1Label);
         super.update(this.getGraphics());
     }
 
@@ -132,57 +109,63 @@ public class RoundGUI extends JFrame {
         player6NameLabel.setText(null);
         player6RoleLabel.setText(null);
         player6ScoreLabel.setText(null);
+
         for(int i = 0; i < currentPlayerList.size(); i++){
-            System.out.println(i);
             switch (i) {
                 case 0:
                     player1NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
-                        player1RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().toString());
+                        player1RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().toString());
                     } else {
                         player1RoleLabel.setText("Role : Unknown");
                     }
                     player1ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
+                    break;
                 case 1:
                     player2NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
-                        player2RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().toString());
+                        player2RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().toString());
                     } else {
                         player2RoleLabel.setText("Role : Unknown");
                     }
-                    player2ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());//currentPlayerCard2Label.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentPlayerCardList.get(i).toString() + ".png")));
+                    player2ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
+                    break;
                 case 2:
                     player3NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
-                        player3RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
+                        player3RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
                     } else {
                         player3RoleLabel.setText("Role : Unknown");
                     }
                     player3ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
+                    break;
                 case 3:
                     player4NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
-                        player4RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
+                        player4RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
                     } else {
                         player4RoleLabel.setText("Role : Unknown");
                     }
                     player4ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
+                    break;
                 case 4:
                     player5NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
-                        player5RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
+                        player5RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
                     } else {
                         player5RoleLabel.setText("Role : Unknown");
                     }
                     player5ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
+                    break;
                 case 5:
                     player6NameLabel.setText(currentPlayerList.get(i).getName());
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
-                        player6RoleLabel.setText("Role :" + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
+                        player6RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
                     } else {
                         player6RoleLabel.setText("Role : Unknown");
                     }
                     player6ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
+                    break;
             }
         }
         super.update(this.getGraphics());
