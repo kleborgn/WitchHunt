@@ -13,12 +13,6 @@ public class Console {
 
     public static void initGame() {
 
-        SetupGUI setupGUI = new SetupGUI();
-        setupGUI.setVisible(true);
-        setupGUI.pack();
-        setupGUI.setTitle("Witch Hunt Setup");
-        setupGUI.setSize(1280,720);
-
         int nbPlayers, nbHumans, nbAI = 0;
         do {
             System.out.println("Total number of players (3-6):");
@@ -64,7 +58,6 @@ public class Console {
                 for (RumourCard card: caller.getNonRevealedCards()) {
                     System.out.println(card.toString());
                 }
-
                 System.out.println("Press enter to continue...");
                 sc.nextLine();
                 menu(caller);

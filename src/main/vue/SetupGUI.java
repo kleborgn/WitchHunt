@@ -47,25 +47,39 @@ public class SetupGUI extends JFrame {
 
     public void createGame() {
         ArrayList<String> playerNames = new ArrayList<String>();
-        if (player1NameTextField.getText().equals("") == false){
+        int humanCount = 0;
+        int AICount = 0;
+        if (player1NameTextField.getText().equals("") == false && player1AIButton.isSelected() == false){
             playerNames.add(player1NameTextField.getText());
+            humanCount++;
         }
-        if (player2NameTextField.getText().equals("") == false){
+        if (player2NameTextField.getText().equals("") == false && player2AIButton.isSelected() == false){
             playerNames.add(player2NameTextField.getText());
+            humanCount++;
         }
-        if (player3NameTextField.getText().equals("") == false){
+        if (player3NameTextField.getText().equals("") == false && player3AIButton.isSelected() == false){
             playerNames.add(player3NameTextField.getText());
+            humanCount++;
         }
-        if (player4NameTextField.getText().equals("") == false){
+        if (player4NameTextField.getText().equals("") == false && player4AIButton.isSelected() == false){
             playerNames.add(player4NameTextField.getText());
+            humanCount++;
         }
-        if (player5NameTextField.getText().equals("") == false){
+        if (player5NameTextField.getText().equals("") == false && player5AIButton.isSelected() == false){
             playerNames.add(player5NameTextField.getText());
+            humanCount++;
         }
-        if (player6NameTextField.getText().equals("") == false){
+        if (player6NameTextField.getText().equals("") == false && player6AIButton.isSelected() == false){
             playerNames.add(player6NameTextField.getText());
+            humanCount++;
         }
-        Game.createGame(3,3, 0, playerNames);
+        if (player1AIButton.isSelected() == true){AICount++;}
+        if (player2AIButton.isSelected() == true){AICount++;}
+        if (player3AIButton.isSelected() == true){AICount++;}
+        if (player4AIButton.isSelected() == true){AICount++;}
+        if (player5AIButton.isSelected() == true){AICount++;}
+        if (player6AIButton.isSelected() == true){AICount++;}
+        Game.createGame(3,humanCount, AICount, playerNames);
         Game.startGame();
     }
 }

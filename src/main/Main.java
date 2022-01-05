@@ -27,6 +27,7 @@ public class Main {
                 }
                 case "--gui" -> {
                     isGUIMode = true;
+                    GUI.initMainPanel();
                     GUI.initGame();
                 }
                 default -> System.out.println("Unrecognized argument");

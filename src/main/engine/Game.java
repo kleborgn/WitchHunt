@@ -6,7 +6,6 @@ import main.engine.players.HumanPlayer;
 import main.engine.players.Player;
 import main.hci.cmd.Console;
 import main.Main;
-import main.vue.RoundGUI;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -88,7 +87,6 @@ public final class Game {
         }
 
         for (int i = 0; i < nbAI; i++) {
-            System.out.println("Cest les bots");
             players.add(new AIPlayer("BOT " + (i+1)));
         }
     }

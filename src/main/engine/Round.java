@@ -6,8 +6,10 @@ import main.engine.players.AIPlayer;
 import main.engine.players.Player;
 import main.hci.cmd.Console;
 import main.hci.cmd.Debug;
+import main.vue.GUI;
 import main.vue.RoundGUI;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Round {
@@ -39,25 +41,20 @@ public class Round {
                 //TODO : Testing only
             }
         }
-        RoundGUI roundGui = new RoundGUI();
-        roundGui.setVisible(true);
-        roundGui.pack();
-        roundGui.setTitle("Witch Hunt");
-        roundGui.setSize(1280,720);
-        roundGui.setPlayersList(currentPlayers);
+        GUI.setPlayersList(currentPlayers);
         discardedCards = new ArrayList<RumourCard>();
         dealCards();
 
         setNextPlayer(currentPlayers.get(Game.rand.nextInt(currentPlayers.size())));
-//        while (!isRoundEnd(currentPlayers)) {
-        while (true) {
-            Debug.info(nextPlayer.getName());
+        GUI.setCardList(nextPlayer.getRumourCards());
+        while (!isRoundEnd(currentPlayers)) {
+//            Debug.info(nextPlayer.getName());
             if (!(nextPlayer instanceof AIPlayer)) {
                 if (Main.getMode() == Constants.MODE_CMD) {
                     Console.menu(nextPlayer);
                 }
                 else {
-//                    roundGui.setCardList(nextPlayer.getRumourCards());
+//                    GUI.setCardList(nextPlayer.getRumourCards());
                 }
             }
             else {
@@ -71,7 +68,7 @@ public class Round {
                 }
             }
 //            isNeededToIncrementNextPlayer = true;
-            Console.clearScreen();
+//            Console.clearScreen();
         }
 //        dealPoints();
     }
