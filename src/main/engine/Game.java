@@ -95,12 +95,16 @@ public final class Game {
      * Start the game
      */
     public static void startGame() {
-        while(!isLastRound()) {
+        if (Main.getMode() == Constants.MODE_CMD) {
+            while(!isLastRound()) {
+                currentRound = new Round(players);
+                currentRound.startRound(players);
+            }
+            System.out.println(getWinner().getName() + " won!");
+        } else {
             currentRound = new Round(players);
             currentRound.startRound(players);
         }
-        if (Main.getMode() == Constants.MODE_CMD)
-            System.out.println(getWinner().getName() + " won!");
     }
 
     /**

@@ -47,30 +47,26 @@ public class Round {
 
         setNextPlayer(currentPlayers.get(Game.rand.nextInt(currentPlayers.size())));
         GUI.setCardList(nextPlayer, nextPlayer.getRumourCards(), null);
-        while (!isRoundEnd(currentPlayers)) {
+        if (Main.getMode() == Constants.MODE_CMD) {
+            while (!isRoundEnd(currentPlayers)) {
 //            Debug.info(nextPlayer.getName());
-            if (!(nextPlayer instanceof AIPlayer)) {
-                if (Main.getMode() == Constants.MODE_CMD) {
+                if (!(nextPlayer instanceof AIPlayer)) {
                     Console.menu(nextPlayer);
-                }
-                else {
-//                    GUI.setCardList(nextPlayer.getRumourCards());
-                }
-            }
-            else {
-                ((AIPlayer) nextPlayer).aiPlayerChoice();
-            }
-            if (isNeededToIncrementNextPlayer) {
-                if (Game.getPlayers().indexOf(nextPlayer) == Game.getPlayers().size()-1) {
-                    setNextPlayer(currentPlayers.get(0));
                 } else {
-                    setNextPlayer(currentPlayers.get(currentPlayers.indexOf(nextPlayer) + 1));
+                    ((AIPlayer) nextPlayer).aiPlayerChoice();
                 }
+                if (isNeededToIncrementNextPlayer) {
+                    if (Game.getPlayers().indexOf(nextPlayer) == Game.getPlayers().size() - 1) {
+                        setNextPlayer(currentPlayers.get(0));
+                    } else {
+                        setNextPlayer(currentPlayers.get(currentPlayers.indexOf(nextPlayer) + 1));
+                    }
+                }
+                isNeededToIncrementNextPlayer = true;
+                Console.clearScreen();
             }
-//            isNeededToIncrementNextPlayer = true;
-//            Console.clearScreen();
+            dealPoints();
         }
-//        dealPoints();
     }
 
     /**
