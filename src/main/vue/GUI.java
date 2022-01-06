@@ -27,7 +27,7 @@ public class GUI {
         roundGui.setPlayersList(currentPlayers);
     }
 
-    public static void setCardList(ArrayList<RumourCard> currentPlayerCards) {
-        roundGui.setCardList(currentPlayerCards);
+    public static void setCardList(Player currentPlayer, ArrayList<RumourCard> currentPlayerCards, Player accuser) {
+        roundGui.setCardList(currentPlayer, currentPlayerCards, accuser);
     }
 }

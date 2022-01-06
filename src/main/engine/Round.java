@@ -46,7 +46,7 @@ public class Round {
         dealCards();
 
         setNextPlayer(currentPlayers.get(Game.rand.nextInt(currentPlayers.size())));
-        GUI.setCardList(nextPlayer.getRumourCards());
+        GUI.setCardList(nextPlayer, nextPlayer.getRumourCards(), null);
         while (!isRoundEnd(currentPlayers)) {
 //            Debug.info(nextPlayer.getName());
             if (!(nextPlayer instanceof AIPlayer)) {

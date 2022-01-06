@@ -4,6 +4,8 @@ import main.engine.cards.RumourCard;
 import main.engine.players.Player;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class RoundGUI extends JFrame {
@@ -48,6 +50,7 @@ public class RoundGUI extends JFrame {
     private JLabel currentPlayerCard3Label;
     private JLabel currentPlayerCard4Label;
     private JLabel currentPlayerActionLabel;
+    private JButton currentPlayerCard1Button;
     private JButton accusePlayer1Button;
     private JButton accusePlayer2Button;
     private JButton accusePlayer3Button;
@@ -63,30 +66,45 @@ public class RoundGUI extends JFrame {
         validate();
     }
 
-    public void setCardList(ArrayList<RumourCard> currentPlayerCardList){
+    public void setCardList(Player currentPlayer, ArrayList<RumourCard> currentPlayerCardList, Player accuser){
         System.out.println(currentPlayerCardList);
-        currentPlayerCard1Label.setIcon(null);
-        currentPlayerCard2Label.setIcon(null);
-        currentPlayerCard3Label.setIcon(null);
-        currentPlayerCard4Label.setIcon(null);
+        currentPlayerCard1Label.setVisible(false);
+        currentPlayerCard2Label.setVisible(false);
+        currentPlayerCard3Label.setVisible(false);
+        currentPlayerCard4Label.setVisible(false);
+        currentPlayerCard1Button.setVisible(false);
         for(int i = 0; i < currentPlayerCardList.size(); i++){
             switch (i){
                 case 0:
-                    currentPlayerCard1Label.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentPlayerCardList.get(i).toString() + ".png")));
+                    RumourCard currentCard = currentPlayerCardList.get(i);
+                    currentPlayerCard1Button.setVisible(true);
+                    currentPlayerCard1Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard.toString() + ".png")));
+                    currentPlayerCard1Button.addActionListener(e -> {
+                        System.out.println("Ca clique ou quoi");
+//                        if (accuser == null) {
+//                            currentCard.huntEffect(currentPlayer);
+//                        } else {
+//                            currentCard.witchEffect(currentPlayer, accuser);
+//                        }
+                    });
+                    this.revalidate();
                     break;
                 case 1:
+                    currentPlayerCard2Label.setVisible(true);
                     currentPlayerCard2Label.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentPlayerCardList.get(i).toString() + ".png")));
                     break;
                 case 2:
+                    currentPlayerCard3Label.setVisible(true);
                     currentPlayerCard3Label.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentPlayerCardList.get(i).toString() + ".png")));
                     break;
                 case 3:
+                    currentPlayerCard4Label.setVisible(true);
                     currentPlayerCard4Label.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentPlayerCardList.get(i).toString() + ".png")));
                     break;
                 default:
             }
         }
-        System.out.println(currentPlayerCard1Label);
+        this.revalidate();
         super.update(this.getGraphics());
     }
 
@@ -168,6 +186,7 @@ public class RoundGUI extends JFrame {
                     break;
             }
         }
+        this.revalidate();
         super.update(this.getGraphics());
     }
 }

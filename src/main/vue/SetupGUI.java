@@ -36,11 +36,7 @@ public class SetupGUI extends JFrame {
     private JButton createGameButton;
 
     public SetupGUI() {
-        createGameButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                createGame();
-            }
-        });
+        createGameButton.addActionListener(e -> createGame());
         add(globalPanel);
         validate();
     }
