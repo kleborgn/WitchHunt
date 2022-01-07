@@ -20,7 +20,10 @@ public class Cauldron extends RumourCard {
         owner.revealIdentity(owner);
 
         if (owner.getIdentityCard().getIdentity() == Identities.Witch) {
-            Game.setNextPlayer(Game.getPlayers().get(Game.getPlayers().indexOf(owner) - 1));
+            if (Game.getPlayers().indexOf(owner) == 0)
+                Game.setNextPlayer(Game.getPlayers().get(Game.getPlayers().size() - 1));
+            else
+                Game.setNextPlayer(Game.getPlayers().get(Game.getPlayers().indexOf(owner) - 1));
             Game.getCurrentRound().setNeededToIncrementNextPlayer(false);
         } else {
             Game.setNextPlayer(owner.choosePlayer());
