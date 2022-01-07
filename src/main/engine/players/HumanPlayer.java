@@ -6,6 +6,7 @@ import main.engine.Game;
 import main.engine.cards.Identities;
 import main.engine.cards.RumourCard;
 import main.hci.cmd.Console;
+import main.vue.GUI;
 
 import java.util.ArrayList;
 
@@ -29,10 +30,12 @@ public class HumanPlayer extends Player {
                 name = Console.sc.nextLine();
             } while (!Game.isPlayerExisting(name));
             return Game.getPlayerByName(name);
+        } else {
+            Player chosenPlayer = GUI.getChosenPlayer();
+            System.out.println(chosenPlayer.getName());
+            return Game.getPlayerByName(chosenPlayer.getName());
         }
         //TODO: gui mode
-
-        return null;
     }
 
     @Override
@@ -112,6 +115,8 @@ public class HumanPlayer extends Player {
 
         if (Main.getMode() == Constants.MODE_CMD) {
             Console.menuAccused(chosenPlayer, this);
+        } else {
+            GUI.setCardList(chosenPlayer, chosenPlayer.getNonRevealedCards(), this);
         }
     }
 

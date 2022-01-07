@@ -46,7 +46,7 @@ public class Round {
         dealCards();
 
         setNextPlayer(currentPlayers.get(Game.rand.nextInt(currentPlayers.size())));
-        GUI.setCardList(nextPlayer, nextPlayer.getRumourCards(), null);
+        GUI.setCardList(nextPlayer, nextPlayer.getNonRevealedCards(), null);
         if (Main.getMode() == Constants.MODE_CMD) {
             while (!isRoundEnd(currentPlayers)) {
 //            Debug.info(nextPlayer.getName());
@@ -114,6 +114,9 @@ public class Round {
 
     public void setNextPlayer(Player nextPlayer) {
         this.nextPlayer = nextPlayer;
+        if (Main.getMode() == Constants.MODE_GUI) {
+            GUI.setCardList(nextPlayer, nextPlayer.getNonRevealedCards(), null);
+        }
     }
 
     public ArrayList<RumourCard> getAllRevealedRumourCards() {

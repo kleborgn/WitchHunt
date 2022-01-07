@@ -4,14 +4,13 @@ import main.engine.cards.RumourCard;
 import main.engine.players.Player;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class RoundGUI extends JFrame {
     private JPanel globalPanel;
+    private Player chosenPlayer;
     private JPanel currentPlayerPanel;
-    private JLabel currentPlayerName;
+    private JLabel currentPlayerNameLabel;
     private JPanel currentPlayerHand;
     private JPanel allPlayersInfosPanel;
     private JPanel player1Panel;
@@ -20,19 +19,12 @@ public class RoundGUI extends JFrame {
     private JPanel player4Panel;
     private JPanel player5Panel;
     private JPanel player6Panel;
-    private JLabel player1NameLabel;
-    private JLabel player2NameLabel;
-    private JLabel player3NameLabel;
-    private JLabel player4NameLabel;
-    private JLabel player5NameLabel;
-    private JLabel player6NameLabel;
-    private JLabel currentPlayerRole;
-    private JPanel player1CardsPanel;
-    private JPanel player2CardsPanel;
-    private JPanel player3CardsPanel;
-    private JPanel player4CardsPanel;
-    private JPanel player5CardsPanel;
-    private JPanel player6CardsPanel;
+    private JButton player1NameButton;
+    private JButton player2NameButton;
+    private JButton player3NameButton;
+    private JButton player4NameButton;
+    private JButton player5NameButton;
+    private JButton player6NameButton;
     private JLabel player1ScoreLabel;
     private JLabel player2ScoreLabel;
     private JLabel player3ScoreLabel;
@@ -50,11 +42,7 @@ public class RoundGUI extends JFrame {
     private JButton currentPlayerCard2Button;
     private JButton currentPlayerCard3Button;
     private JButton currentPlayerCard4Button;
-    private JButton accusePlayer1Button;
-    private JButton accusePlayer2Button;
-    private JButton accusePlayer3Button;
-    private JButton accusePlayer4Button;
-    private JButton accusePlayer5Button;
+    private JButton currentPlayerAction1Button;
     private ImageIcon iconCurrentPlayerCard1;
     private ImageIcon iconCurrentPlayerCard2;
     private ImageIcon iconCurrentPlayerCard3;
@@ -71,12 +59,31 @@ public class RoundGUI extends JFrame {
         currentPlayerCard2Button.setVisible(false);
         currentPlayerCard3Button.setVisible(false);
         currentPlayerCard4Button.setVisible(false);
+        currentPlayerNameLabel.setText(currentPlayer.getName());
+        if (accuser == null) {
+            currentPlayerActionLabel.setText("Play an Hunt Effect or accuse a Player");
+            currentPlayerAction1Button.setText("Accuse chosen Player");
+            if (currentPlayerAction1Button.getActionListeners().length > 0) {
+                currentPlayerAction1Button.removeActionListener(currentPlayerAction1Button.getActionListeners()[0]);
+            }
+            currentPlayerAction1Button.addActionListener(e -> currentPlayer.accuseSomeone());
+        } else {
+            currentPlayerActionLabel.setText("Play a Witch Effect or reveal your role");
+            currentPlayerAction1Button.setText("Reveal your identity");
+            if (currentPlayerAction1Button.getActionListeners().length > 0) {
+                currentPlayerAction1Button.removeActionListener(currentPlayerAction1Button.getActionListeners()[0]);
+            }
+            currentPlayerAction1Button.addActionListener(e -> currentPlayer.revealIdentity(accuser));
+        }
         for(int i = 0; i < currentPlayerCardList.size(); i++){
             switch (i){
                 case 0:
                     RumourCard currentCard1 = currentPlayerCardList.get(i);
                     currentPlayerCard1Button.setVisible(true);
                     currentPlayerCard1Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard1.toString() + ".png")));
+                    if (currentPlayerCard1Button.getActionListeners().length > 0) {
+                        currentPlayerCard1Button.removeActionListener(currentPlayerCard1Button.getActionListeners()[0]);
+                    }
                     currentPlayerCard1Button.addActionListener(e -> {
                         if (accuser == null) {
                             currentCard1.huntEffect(currentPlayer);
@@ -89,6 +96,9 @@ public class RoundGUI extends JFrame {
                     RumourCard currentCard2 = currentPlayerCardList.get(i);
                     currentPlayerCard2Button.setVisible(true);
                     currentPlayerCard2Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard2.toString() + ".png")));
+                    if (currentPlayerCard2Button.getActionListeners().length > 0) {
+                        currentPlayerCard2Button.removeActionListener(currentPlayerCard2Button.getActionListeners()[0]);
+                    }
                     currentPlayerCard2Button.addActionListener(e -> {
                         if (accuser == null) {
                             currentCard2.huntEffect(currentPlayer);
@@ -101,6 +111,9 @@ public class RoundGUI extends JFrame {
                     RumourCard currentCard3 = currentPlayerCardList.get(i);
                     currentPlayerCard3Button.setVisible(true);
                     currentPlayerCard3Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard3.toString() + ".png")));
+                    if (currentPlayerCard3Button.getActionListeners().length > 0) {
+                        currentPlayerCard3Button.removeActionListener(currentPlayerCard3Button.getActionListeners()[0]);
+                    }
                     currentPlayerCard3Button.addActionListener(e -> {
                         if (accuser == null) {
                             currentCard3.huntEffect(currentPlayer);
@@ -113,6 +126,9 @@ public class RoundGUI extends JFrame {
                     RumourCard currentCard4 = currentPlayerCardList.get(i);
                     currentPlayerCard4Button.setVisible(true);
                     currentPlayerCard4Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard4.toString() + ".png")));
+                    if (currentPlayerCard4Button.getActionListeners().length > 0) {
+                        currentPlayerCard4Button.removeActionListener(currentPlayerCard4Button.getActionListeners()[0]);
+                    }
                     currentPlayerCard4Button.addActionListener(e -> {
                         if (accuser == null) {
                             currentCard4.huntEffect(currentPlayer);
@@ -129,32 +145,34 @@ public class RoundGUI extends JFrame {
     }
 
     public void setPlayersList(ArrayList<Player> currentPlayerList){
-        player1NameLabel.setVisible(false);
+        player1NameButton.setVisible(false);
         player1RoleLabel.setVisible(false);
         player1ScoreLabel.setVisible(false);
-        player2NameLabel.setVisible(false);
+        player2NameButton.setVisible(false);
         player2RoleLabel.setVisible(false);
         player2ScoreLabel.setVisible(false);
-        player3NameLabel.setVisible(false);
+        player3NameButton.setVisible(false);
         player3RoleLabel.setVisible(false);
         player3ScoreLabel.setVisible(false);
-        player4NameLabel.setVisible(false);
+        player4NameButton.setVisible(false);
         player4RoleLabel.setVisible(false);
         player4ScoreLabel.setVisible(false);
-        player5NameLabel.setVisible(false);
+        player5NameButton.setVisible(false);
         player5RoleLabel.setVisible(false);
         player5ScoreLabel.setVisible(false);
-        player6NameLabel.setVisible(false);
+        player6NameButton.setVisible(false);
         player6RoleLabel.setVisible(false);
         player6ScoreLabel.setVisible(false);
 
         for(int i = 0; i < currentPlayerList.size(); i++){
             switch (i) {
                 case 0:
-                    player1NameLabel.setVisible(true);
+                    Player currentPlayer1 = currentPlayerList.get(i);
+                    player1NameButton.setVisible(true);
                     player1RoleLabel.setVisible(true);
                     player1ScoreLabel.setVisible(true);
-                    player1NameLabel.setText(currentPlayerList.get(i).getName());
+                    player1NameButton.setText(currentPlayerList.get(i).getName());
+                    player1NameButton.addActionListener(e -> chosenPlayer = currentPlayer1);
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
                         player1RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().toString());
                     } else {
@@ -163,10 +181,12 @@ public class RoundGUI extends JFrame {
                     player1ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
                     break;
                 case 1:
-                    player2NameLabel.setVisible(true);
+                    Player currentPlayer2 = currentPlayerList.get(i);
+                    player2NameButton.setVisible(true);
                     player2RoleLabel.setVisible(true);
                     player2ScoreLabel.setVisible(true);
-                    player2NameLabel.setText(currentPlayerList.get(i).getName());
+                    player2NameButton.setText(currentPlayerList.get(i).getName());
+                    player2NameButton.addActionListener(e -> chosenPlayer = currentPlayer2);
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
                         player2RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().toString());
                     } else {
@@ -175,10 +195,12 @@ public class RoundGUI extends JFrame {
                     player2ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
                     break;
                 case 2:
-                    player3NameLabel.setVisible(true);
+                    Player currentPlayer3 = currentPlayerList.get(i);
+                    player3NameButton.setVisible(true);
                     player3RoleLabel.setVisible(true);
                     player3ScoreLabel.setVisible(true);
-                    player3NameLabel.setText(currentPlayerList.get(i).getName());
+                    player3NameButton.setText(currentPlayerList.get(i).getName());
+                    player3NameButton.addActionListener(e -> chosenPlayer = currentPlayer3);
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
                         player3RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
                     } else {
@@ -187,10 +209,12 @@ public class RoundGUI extends JFrame {
                     player3ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
                     break;
                 case 3:
-                    player4NameLabel.setVisible(true);
+                    Player currentPlayer4 = currentPlayerList.get(i);
+                    player4NameButton.setVisible(true);
                     player4RoleLabel.setVisible(true);
                     player4ScoreLabel.setVisible(true);
-                    player4NameLabel.setText(currentPlayerList.get(i).getName());
+                    player4NameButton.setText(currentPlayerList.get(i).getName());
+                    player4NameButton.addActionListener(e -> chosenPlayer = currentPlayer4);
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
                         player4RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
                     } else {
@@ -199,10 +223,12 @@ public class RoundGUI extends JFrame {
                     player4ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
                     break;
                 case 4:
-                    player5NameLabel.setVisible(true);
+                    Player currentPlayer5 = currentPlayerList.get(i);
+                    player5NameButton.setVisible(true);
                     player5RoleLabel.setVisible(true);
                     player5ScoreLabel.setVisible(true);
-                    player5NameLabel.setText(currentPlayerList.get(i).getName());
+                    player5NameButton.setText(currentPlayerList.get(i).getName());
+                    player5NameButton.addActionListener(e -> chosenPlayer = currentPlayer5);
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
                         player5RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
                     } else {
@@ -211,10 +237,12 @@ public class RoundGUI extends JFrame {
                     player5ScoreLabel.setText("Score : " + currentPlayerList.get(i).getPoints());
                     break;
                 case 5:
-                    player6NameLabel.setVisible(true);
+                    Player currentPlayer6 = currentPlayerList.get(i);
+                    player6NameButton.setVisible(true);
                     player6RoleLabel.setVisible(true);
                     player6ScoreLabel.setVisible(true);
-                    player6NameLabel.setText(currentPlayerList.get(i).getName());
+                    player6NameButton.setText(currentPlayerList.get(i).getName());
+                    player6NameButton.addActionListener(e -> chosenPlayer = currentPlayer6);
                     if (currentPlayerList.get(i).getIdentityCard().getIsRevealed() == true) {
                         player6RoleLabel.setText("Role : " + currentPlayerList.get(i).getIdentityCard().getIdentity().toString());
                     } else {
@@ -226,5 +254,9 @@ public class RoundGUI extends JFrame {
         }
         this.revalidate();
         super.update(this.getGraphics());
+    }
+
+    public Player getChosenPlayer() {
+        return chosenPlayer;
     }
 }

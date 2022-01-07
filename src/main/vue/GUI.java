@@ -6,13 +6,14 @@ import main.engine.players.Player;
 import java.util.ArrayList;
 
 public class GUI {
+    static SetupGUI setupGui;
     static RoundGUI roundGui;
     public static void initGame() {
-        SetupGUI setupGUI = new SetupGUI();
-        setupGUI.setVisible(true);
-        setupGUI.pack();
-        setupGUI.setTitle("Witch Hunt");
-        setupGUI.setSize(640, 480);
+        setupGui = new SetupGUI();
+        setupGui.setVisible(true);
+        setupGui.pack();
+        setupGui.setTitle("Witch Hunt");
+        setupGui.setSize(640, 480);
     }
 
     public static void initMainPanel() {
@@ -29,5 +30,8 @@ public class GUI {
 
     public static void setCardList(Player currentPlayer, ArrayList<RumourCard> currentPlayerCards, Player accuser) {
         roundGui.setCardList(currentPlayer, currentPlayerCards, accuser);
+    }
+    public static Player getChosenPlayer() {
+        return roundGui.getChosenPlayer();
     }
 }
