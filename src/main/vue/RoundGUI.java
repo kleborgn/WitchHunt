@@ -1,5 +1,6 @@
 package main.vue;
 
+import main.engine.cards.Identities;
 import main.engine.cards.RumourCard;
 import main.engine.players.Player;
 
@@ -43,6 +44,7 @@ public class RoundGUI extends JFrame {
     private JButton currentPlayerCard3Button;
     private JButton currentPlayerCard4Button;
     private JButton currentPlayerAction1Button;
+    private JButton currentPlayerAction2Button;
     private ImageIcon iconCurrentPlayerCard1;
     private ImageIcon iconCurrentPlayerCard2;
     private ImageIcon iconCurrentPlayerCard3;
@@ -53,14 +55,28 @@ public class RoundGUI extends JFrame {
         validate();
     }
 
-    public void setCardList(Player currentPlayer, ArrayList<RumourCard> currentPlayerCardList, Player accuser){
+    public void setCardList(Player currentPlayer, ArrayList<RumourCard> currentPlayerCardList, Player accuser, boolean chooseIdentity){
         System.out.println(currentPlayerCardList);
         currentPlayerCard1Button.setVisible(false);
         currentPlayerCard2Button.setVisible(false);
         currentPlayerCard3Button.setVisible(false);
         currentPlayerCard4Button.setVisible(false);
+        currentPlayerAction2Button.setVisible(false);
         currentPlayerNameLabel.setText(currentPlayer.getName());
-        if (accuser == null) {
+        if (chooseIdentity == true) {
+            currentPlayerActionLabel.setText("Choose your identity");
+            currentPlayerAction1Button.setText("Witch");
+            if (currentPlayerAction1Button.getActionListeners().length > 0) {
+                currentPlayerAction1Button.removeActionListener(currentPlayerAction1Button.getActionListeners()[0]);
+            }
+            currentPlayerAction1Button.addActionListener(e -> currentPlayer.pickIdentity(Identities.Witch));
+            currentPlayerAction2Button.setVisible(true);
+            currentPlayerAction2Button.setText("Villager");
+            if (currentPlayerAction2Button.getActionListeners().length > 0) {
+                currentPlayerAction2Button.removeActionListener(currentPlayerAction2Button.getActionListeners()[0]);
+            }
+            currentPlayerAction2Button.addActionListener(e -> currentPlayer.pickIdentity(Identities.Villager));
+        } else if (accuser == null) {
             currentPlayerActionLabel.setText("Play an Hunt Effect or accuse a Player");
             currentPlayerAction1Button.setText("Accuse chosen Player");
             if (currentPlayerAction1Button.getActionListeners().length > 0) {
@@ -75,69 +91,71 @@ public class RoundGUI extends JFrame {
             }
             currentPlayerAction1Button.addActionListener(e -> currentPlayer.revealIdentity(accuser));
         }
-        for(int i = 0; i < currentPlayerCardList.size(); i++){
-            switch (i){
-                case 0:
-                    RumourCard currentCard1 = currentPlayerCardList.get(i);
-                    currentPlayerCard1Button.setVisible(true);
-                    currentPlayerCard1Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard1.toString() + ".png")));
-                    if (currentPlayerCard1Button.getActionListeners().length > 0) {
-                        currentPlayerCard1Button.removeActionListener(currentPlayerCard1Button.getActionListeners()[0]);
-                    }
-                    currentPlayerCard1Button.addActionListener(e -> {
-                        if (accuser == null) {
-                            currentCard1.huntEffect(currentPlayer);
-                        } else {
-                            currentCard1.witchEffect(currentPlayer, accuser);
+        if (currentPlayerCardList != null){
+            for(int i = 0; i < currentPlayerCardList.size(); i++){
+                switch (i){
+                    case 0:
+                        RumourCard currentCard1 = currentPlayerCardList.get(i);
+                        currentPlayerCard1Button.setVisible(true);
+                        currentPlayerCard1Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard1.toString() + ".png")));
+                        if (currentPlayerCard1Button.getActionListeners().length > 0) {
+                            currentPlayerCard1Button.removeActionListener(currentPlayerCard1Button.getActionListeners()[0]);
                         }
-                    });
-                    break;
-                case 1:
-                    RumourCard currentCard2 = currentPlayerCardList.get(i);
-                    currentPlayerCard2Button.setVisible(true);
-                    currentPlayerCard2Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard2.toString() + ".png")));
-                    if (currentPlayerCard2Button.getActionListeners().length > 0) {
-                        currentPlayerCard2Button.removeActionListener(currentPlayerCard2Button.getActionListeners()[0]);
-                    }
-                    currentPlayerCard2Button.addActionListener(e -> {
-                        if (accuser == null) {
-                            currentCard2.huntEffect(currentPlayer);
-                        } else {
-                            currentCard2.witchEffect(currentPlayer, accuser);
+                        currentPlayerCard1Button.addActionListener(e -> {
+                            if (accuser == null) {
+                                currentCard1.huntEffect(currentPlayer);
+                            } else {
+                                currentCard1.witchEffect(currentPlayer, accuser);
+                            }
+                        });
+                        break;
+                    case 1:
+                        RumourCard currentCard2 = currentPlayerCardList.get(i);
+                        currentPlayerCard2Button.setVisible(true);
+                        currentPlayerCard2Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard2.toString() + ".png")));
+                        if (currentPlayerCard2Button.getActionListeners().length > 0) {
+                            currentPlayerCard2Button.removeActionListener(currentPlayerCard2Button.getActionListeners()[0]);
                         }
-                    });
-                    break;
-                case 2:
-                    RumourCard currentCard3 = currentPlayerCardList.get(i);
-                    currentPlayerCard3Button.setVisible(true);
-                    currentPlayerCard3Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard3.toString() + ".png")));
-                    if (currentPlayerCard3Button.getActionListeners().length > 0) {
-                        currentPlayerCard3Button.removeActionListener(currentPlayerCard3Button.getActionListeners()[0]);
-                    }
-                    currentPlayerCard3Button.addActionListener(e -> {
-                        if (accuser == null) {
-                            currentCard3.huntEffect(currentPlayer);
-                        } else {
-                            currentCard3.witchEffect(currentPlayer, accuser);
+                        currentPlayerCard2Button.addActionListener(e -> {
+                            if (accuser == null) {
+                                currentCard2.huntEffect(currentPlayer);
+                            } else {
+                                currentCard2.witchEffect(currentPlayer, accuser);
+                            }
+                        });
+                        break;
+                    case 2:
+                        RumourCard currentCard3 = currentPlayerCardList.get(i);
+                        currentPlayerCard3Button.setVisible(true);
+                        currentPlayerCard3Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard3.toString() + ".png")));
+                        if (currentPlayerCard3Button.getActionListeners().length > 0) {
+                            currentPlayerCard3Button.removeActionListener(currentPlayerCard3Button.getActionListeners()[0]);
                         }
-                    });
-                    break;
-                case 3:
-                    RumourCard currentCard4 = currentPlayerCardList.get(i);
-                    currentPlayerCard4Button.setVisible(true);
-                    currentPlayerCard4Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard4.toString() + ".png")));
-                    if (currentPlayerCard4Button.getActionListeners().length > 0) {
-                        currentPlayerCard4Button.removeActionListener(currentPlayerCard4Button.getActionListeners()[0]);
-                    }
-                    currentPlayerCard4Button.addActionListener(e -> {
-                        if (accuser == null) {
-                            currentCard4.huntEffect(currentPlayer);
-                        } else {
-                            currentCard4.witchEffect(currentPlayer, accuser);
+                        currentPlayerCard3Button.addActionListener(e -> {
+                            if (accuser == null) {
+                                currentCard3.huntEffect(currentPlayer);
+                            } else {
+                                currentCard3.witchEffect(currentPlayer, accuser);
+                            }
+                        });
+                        break;
+                    case 3:
+                        RumourCard currentCard4 = currentPlayerCardList.get(i);
+                        currentPlayerCard4Button.setVisible(true);
+                        currentPlayerCard4Button.setIcon(new ImageIcon(getClass().getResource("/main/assets/" + currentCard4.toString() + ".png")));
+                        if (currentPlayerCard4Button.getActionListeners().length > 0) {
+                            currentPlayerCard4Button.removeActionListener(currentPlayerCard4Button.getActionListeners()[0]);
                         }
-                    });
-                    break;
-                default:
+                        currentPlayerCard4Button.addActionListener(e -> {
+                            if (accuser == null) {
+                                currentCard4.huntEffect(currentPlayer);
+                            } else {
+                                currentCard4.witchEffect(currentPlayer, accuser);
+                            }
+                        });
+                        break;
+                    default:
+                }
             }
         }
         this.revalidate();

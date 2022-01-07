@@ -96,6 +96,8 @@ public class HumanPlayer extends Player {
                     this.chooseIdentity();
                 }
             }
+        } else {
+            GUI.setCardList(this, null, null, true);
         }
     }
 
@@ -116,7 +118,7 @@ public class HumanPlayer extends Player {
         if (Main.getMode() == Constants.MODE_CMD) {
             Console.menuAccused(chosenPlayer, this);
         } else {
-            GUI.setCardList(chosenPlayer, chosenPlayer.getNonRevealedCards(), this);
+            GUI.setCardList(chosenPlayer, chosenPlayer.getNonRevealedCards(), this, false);
         }
     }
 

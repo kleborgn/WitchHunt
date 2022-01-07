@@ -28,8 +28,8 @@ public class GUI {
         roundGui.setPlayersList(currentPlayers);
     }
 
-    public static void setCardList(Player currentPlayer, ArrayList<RumourCard> currentPlayerCards, Player accuser) {
-        roundGui.setCardList(currentPlayer, currentPlayerCards, accuser);
+    public static void setCardList(Player currentPlayer, ArrayList<RumourCard> currentPlayerCards, Player accuser, boolean chooseIdentity) {
+        roundGui.setCardList(currentPlayer, currentPlayerCards, accuser, chooseIdentity);
     }
     public static Player getChosenPlayer() {
         return roundGui.getChosenPlayer();

@@ -36,17 +36,16 @@ public class Round {
             }
         }
         if (Main.getMode() == Constants.MODE_GUI) {
-            for (Player p:currentPlayers) {
-                p.pickIdentity(Identities.Witch);
-                //TODO : Testing only
-            }
+            players.get(0).chooseIdentity();
         }
-        GUI.setPlayersList(currentPlayers);
         discardedCards = new ArrayList<RumourCard>();
         dealCards();
 
         setNextPlayer(currentPlayers.get(Game.rand.nextInt(currentPlayers.size())));
-        GUI.setCardList(nextPlayer, nextPlayer.getNonRevealedCards(), null);
+        if (Main.getMode() == Constants.MODE_GUI) {
+            GUI.setPlayersList(currentPlayers);
+            GUI.setCardList(nextPlayer, nextPlayer.getNonRevealedCards(), null, false);
+        }
         if (Main.getMode() == Constants.MODE_CMD) {
             while (!isRoundEnd(currentPlayers)) {
 //            Debug.info(nextPlayer.getName());
@@ -115,7 +114,7 @@ public class Round {
     public void setNextPlayer(Player nextPlayer) {
         this.nextPlayer = nextPlayer;
         if (Main.getMode() == Constants.MODE_GUI) {
-            GUI.setCardList(nextPlayer, nextPlayer.getNonRevealedCards(), null);
+            GUI.setCardList(nextPlayer, nextPlayer.getNonRevealedCards(), null, false);
         }
     }
 
