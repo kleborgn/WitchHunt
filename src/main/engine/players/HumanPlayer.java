@@ -7,6 +7,7 @@ import main.engine.cards.Identities;
 import main.engine.cards.RumourCard;
 import main.hci.cmd.Console;
 import main.vue.GUI;
+import main.vue.PopupGUI;
 
 import java.util.ArrayList;
 
@@ -32,10 +33,8 @@ public class HumanPlayer extends Player {
             return Game.getPlayerByName(name);
         } else {
             Player chosenPlayer = GUI.getChosenPlayer();
-            System.out.println(chosenPlayer.getName());
-            return Game.getPlayerByName(chosenPlayer.getName());
+            return chosenPlayer;
         }
-        //TODO: gui mode
     }
 
     @Override
@@ -70,6 +69,12 @@ public class HumanPlayer extends Player {
     public void displayMessage(String message) {
         if (Main.getMode() == Constants.MODE_CMD) {
             System.out.println(this.getName() + " : " + message);
+        } else {
+            PopupGUI popupGUI = new PopupGUI();
+            popupGUI.setVisible(true);
+            popupGUI.pack();
+            popupGUI.setSize(400, 50);
+            popupGUI.setPopupMessageLabel(this.getName() + " : " + message);
         }
         //TODO: add gui mode
     }
@@ -106,7 +111,9 @@ public class HumanPlayer extends Player {
         Player chosenPlayer = this.choosePlayer();
         if (chosenPlayer.getIdentityCard().getIsRevealed()) {
             this.displayMessage("This player has already revealed their identity. They are " + chosenPlayer.getIdentityCard().toString());
-            Console.menu(this);
+            if (Main.getMode() == Constants.MODE_CMD) {
+                Console.menu(this);
+            }
             return;
         }
 

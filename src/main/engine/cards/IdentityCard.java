@@ -2,7 +2,10 @@ package main.engine.cards;
 
 import main.Main;
 import main.engine.Constants;
+import main.engine.Game;
+import main.engine.Round;
 import main.engine.players.Player;
+import main.vue.GUI;
 
 public class IdentityCard {
     Identities identity;
@@ -29,7 +32,14 @@ public class IdentityCard {
         this.isRevealed = true;
         if(Main.getMode() == Constants.MODE_CMD)
             owner.messageAll("Im a " + this.toString());
-        //TODO: gui mode
+        else {
+            if (Game.getCurrentRound().isRoundEnd(Game.getCurrentRound().getCurrentPlayers()) == true) {
+                Game.getCurrentRound().dealPoints();
+                Game.startGame();
+            } else {
+                GUI.setPlayersList(Game.getCurrentRound().getCurrentPlayers());
+            }
+        }
     }
 
     /**
