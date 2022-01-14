@@ -62,7 +62,6 @@ public class RoundGUI extends JFrame {
     }
 
     public void setCardList(Player currentPlayer, ArrayList<RumourCard> currentPlayerCardList, Player accuser, boolean chooseIdentity){
-        System.out.println(currentPlayerCardList);
         for(int i = 0; i < currentPlayerCardButtons.size(); i++){
             currentPlayerCardButtons.get(i).setVisible(false);
         }

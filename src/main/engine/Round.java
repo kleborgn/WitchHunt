@@ -36,10 +36,8 @@ public class Round {
             }
         }
         if (Main.getMode() == Constants.MODE_GUI) {
-//            players.get(0).chooseIdentity();
             for (int i = 0; i < currentPlayers.size(); i++){
                 int randomN = Game.rand.nextInt(2);
-
                 if(randomN == 0) {
                     currentPlayers.get(i).pickIdentity(Identities.Villager);
                 } else {
@@ -52,11 +50,6 @@ public class Round {
 
         setNextPlayer(currentPlayers.get(Game.rand.nextInt(currentPlayers.size())));
         if (Main.getMode() == Constants.MODE_GUI) {
-            for (int i = 0; i < currentPlayers.size(); i++){
-                if (currentPlayers.get(i).getIdentityCard() == null) {
-                    System.out.println("uyguihjf");
-                }
-            }
             GUI.setPlayersList(currentPlayers);
             GUI.setCardList(nextPlayer, nextPlayer.getNonRevealedCards(), null, false);
         }
